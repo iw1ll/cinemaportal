@@ -2,7 +2,7 @@ import { Component, inject, signal, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { tap } from 'rxjs';
-import { TopService } from '../../../../shared/services/top-service';
+import { TopService } from '../../../../shared/services/top-api-service';
 import { FilmDetail } from '../../../../shared/interfaces/top-films.interface';
 import { FilmCard } from '../../../../shared/ui/component/film-card/film-card';
 
@@ -18,7 +18,6 @@ export class TopFilmDetailComponent implements OnInit {
   private topService = inject(TopService);
   private backNavigate = inject(Router);
   film = signal<FilmDetail | null>(null);
-
 
   ngOnInit(): void {
     this.geDetails();
