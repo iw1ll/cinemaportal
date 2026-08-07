@@ -1,20 +1,19 @@
 export interface Film {
-  filmId: number;
+  kinopoiskId: number;
   nameRu: string;
   nameEn: string | null;
-  year: string;
-  filmLength: string;
-  countries: { country: string }[];
-  genres: { genre: string }[];
-  rating: string;
-  ratingVoteCount: number;
+  year: number;
+  ratingKinopoisk: number;
   posterUrl: string;
   posterUrlPreview: string;
+  genres: { genre: string }[];
+  countries: { country: string }[];
 }
 
 export interface TopFilmsResponse {
-  pagesCount: number;
-  films: Film[];
+  total: number;
+  totalPages: number;
+  items: Film[];
 }
 
 export interface FilmDetail {
