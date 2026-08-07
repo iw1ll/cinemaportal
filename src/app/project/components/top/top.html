@@ -1,1 +1,14 @@
-<p>top works!</p>
+<h2>Топ 250 фильмов</h2>
+
+<div class="grid">
+  @for (film of topFilms(); track film.filmId) {
+    <a (click)="goToFilm(film.filmId)">
+      <img class="card__poster" [src]="film.posterUrlPreview" [alt]="film.nameRu" />
+      <div class="card__info">
+        <span class="card__title">{{ film.nameRu }}</span>
+        <span class="card__year">{{ film.year }}</span>
+        <span class="card__rating">⭐ {{ film.rating }}</span>
+      </div>
+    </a>
+  }
+</div>

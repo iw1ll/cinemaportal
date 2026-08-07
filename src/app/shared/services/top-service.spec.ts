@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { Top } from './top';
+import { TopService } from './top-service';
 
-describe('Top', () => {
-  let service: Top;
+describe('TopService', () => {
+  let service: TopService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(Top);
+    service = TestBed.inject(TopService);
   });
 
   it('should be created', () => {
