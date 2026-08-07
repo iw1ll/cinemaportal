@@ -16,7 +16,7 @@
         <span class="detail__length">{{ filmData.filmLength }}</span>
       </div>
 
-      @if (filmData.genres?.length) {
+      @if (filmData.genres.length) {
         <div class="detail__genres">
           @for (g of filmData.genres; track g.genre) {
             <span class="detail__tag">{{ g.genre }}</span>
@@ -24,7 +24,7 @@
         </div>
       }
 
-      @if (filmData.countries?.length) {
+      @if (filmData.countries.length) {
         <p class="detail__countries">
           🌍 {{ getCountries() }}
         </p>

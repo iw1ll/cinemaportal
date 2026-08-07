@@ -3,7 +3,7 @@ import { TopService } from '../../../../shared/services/top-service';
 import { Router } from '@angular/router';
 import { Film } from '../../../../shared/interfaces/top-films.interface';
 import { PaginationComponent } from '../../../../shared/ui/component/pagination/pagination.component';
-import { tap } from 'rxjs';
+import { finalize, tap } from 'rxjs';
 
 @Component({
   selector: 'app-top',
@@ -30,10 +30,12 @@ export class TopFilmComponent implements OnInit {
 
     this.topService.getTopFilms(page).pipe(
       tap(response => {
-      this.topFilms.set(response.items);
-      this.totalPages.set(response.totalPages);
-      this.loading.set(false);
-    })
+        this.topFilms.set(response.items);
+        this.totalPages.set(response.totalPages);
+    }),
+      finalize(() => {
+        this.loading.set(false);
+      })
     ).subscribe();
   }
 
