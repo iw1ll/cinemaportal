@@ -1,9 +1,9 @@
 import { Component, inject, signal, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FilmDetail } from '../../../shared/interfaces/top-films.interface';
-import { TopService } from '../../../shared/services/top-service';
 import { tap } from 'rxjs';
+import { TopService } from '../../../../shared/services/top-service';
+import { FilmDetail } from '../../../../shared/interfaces/top-films.interface';
 
 @Component({
   selector: 'app-film-detail',
