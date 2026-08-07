@@ -1,0 +1,21 @@
+<div class="pagination">
+  <button
+    class="pagination__btn"
+    [disabled]="currentPage() === 1"
+    (click)="prev.emit()"
+  >
+    ← Назад
+  </button>
+
+  <span class="pagination__info">
+    {{ currentPage() }} / {{ totalPages() }}
+  </span>
+
+  <button
+    class="pagination__btn"
+    [disabled]="currentPage() === totalPages()"
+    (click)="next.emit()"
+  >
+    Вперёд →
+  </button>
+</div>
