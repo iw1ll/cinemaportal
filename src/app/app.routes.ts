@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
-import { MoviesComponent } from './project/components/movies/movies';
-import { SeriesComponent } from './project/components/series/series';
-import { AnimeComponent } from './project/components/anime/anime';
-import { CartoonsComponent } from './project/components/cartoons/cartoons';
+import { MoviesComponent } from './project/components/pages/movies/movies';
+import { SeriesComponent } from './project/components/pages/series/series';
+import { AnimeComponent } from './project/components/pages/anime/anime';
+import { CartoonsComponent } from './project/components/pages/cartoons/cartoons';
 import { LayoutComponent } from './project/layout/layout/layout';
-import { MainComponent } from './project/components/main/main';
-import { TopFilmComponent } from './project/components/top/top';
+import { MainComponent } from './project/components/pages/main/main';
+import { TopFilmComponent } from './project/components/pages/top/top';
 import { TopFilmDetailComponent } from './project/components/top-film-detail/top-film-detail.component';
 
 export const routes: Routes = [
