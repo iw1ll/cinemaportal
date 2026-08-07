@@ -1,14 +1,34 @@
+<!-- top.html — исправленный -->
+
 <h2>Топ 250 фильмов</h2>
 
+<app-pagination
+  [currentPage]="currentPage()"
+  [totalPages]="totalPages()"
+  (prev)="prevPage()"
+  (next)="nextPage()"
+/>
+
+@if (loading()) {
+  <div class="loading">Загрузка...</div>
+}
+
 <div class="grid">
-  @for (film of topFilms(); track film.filmId) {
-    <a (click)="goToFilm(film.filmId)">
+  @for (film of topFilms(); track film.kinopoiskId) {
+    <div class="card" (click)="goToFilm(film.kinopoiskId)">
       <img class="card__poster" [src]="film.posterUrlPreview" [alt]="film.nameRu" />
       <div class="card__info">
         <span class="card__title">{{ film.nameRu }}</span>
         <span class="card__year">{{ film.year }}</span>
-        <span class="card__rating">⭐ {{ film.rating }}</span>
+        <span class="card__rating">⭐ {{ film.ratingKinopoisk }}</span>
       </div>
-    </a>
+    </div>
   }
 </div>
+
+<app-pagination
+  [currentPage]="currentPage()"
+  [totalPages]="totalPages()"
+  (prev)="prevPage()"
+  (next)="nextPage()"
+/>
