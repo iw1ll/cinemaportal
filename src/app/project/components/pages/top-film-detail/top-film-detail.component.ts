@@ -1,5 +1,5 @@
 import { Component, inject, signal, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { tap } from 'rxjs';
 import { TopService } from '../../../../shared/services/top-service';
@@ -16,7 +16,9 @@ import { FilmCard } from '../../../../shared/ui/component/film-card/film-card';
 export class TopFilmDetailComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private topService = inject(TopService);
+  private backNavigate = inject(Router);
   film = signal<FilmDetail | null>(null);
+
 
   ngOnInit(): void {
     this.geDetails();
@@ -27,5 +29,9 @@ export class TopFilmDetailComponent implements OnInit {
     this.topService.geDetailsFilms(id).pipe(
       tap(data => this.film.set(data))
     ).subscribe();
+  }
+
+  backToTopPage() {
+    this.backNavigate.navigate(['/top']);
   }
 }

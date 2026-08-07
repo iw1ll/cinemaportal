@@ -117,30 +117,3 @@
     color: #6b6b85;
   }
 }
-
-.back-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: #2a2a3d;
-  color: #a5a5c0;
-  border: 1px solid #3a3a5a;
-  padding: 10px 20px;
-  border-radius: 10px;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  margin-bottom: 24px;
-  transition: background 0.2s, color 0.2s, border-color 0.2s;
-
-  &:hover {
-    background: #3a3a5a;
-    color: #e2e2f0;
-    border-color: #5a5a7a;
-  }
-
-  &::before {
-    content: '←';
-    font-size: 16px;
-  }
-}
