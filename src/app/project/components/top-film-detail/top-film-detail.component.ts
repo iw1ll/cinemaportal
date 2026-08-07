@@ -18,6 +18,10 @@ export class TopFilmDetailComponent implements OnInit {
   private backNavigate = inject(Router);
   film = signal<FilmDetail | null>(null);
 
+  ngOnInit(): void {
+    this.geDetails();
+  }
+
   getCountries(): string {
     const f = this.film();
     if ( f!== null) {
@@ -25,10 +29,6 @@ export class TopFilmDetailComponent implements OnInit {
     } else {
       return '';
     }
-  }
-
-  ngOnInit(): void {
-    this.geDetails();
   }
 
   geDetails() {
