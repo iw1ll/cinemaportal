@@ -5,6 +5,7 @@ import { AnimeComponent } from './project/components/anime/anime';
 import { CartoonsComponent } from './project/components/cartoons/cartoons';
 import { LayoutComponent } from './project/layout/layout/layout';
 import { MainComponent } from './project/components/main/main';
+import { TopFilmComponent } from './project/components/top/top';
 
 export const routes: Routes = [
   {
@@ -13,6 +14,7 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: '/main', pathMatch: 'full' },
       { path: 'main', component: MainComponent },
+      { path: 'top', component: TopFilmComponent },
       { path: 'movies', component: MoviesComponent },
       { path: 'series', component: SeriesComponent },
       { path: 'anime', component: AnimeComponent },
