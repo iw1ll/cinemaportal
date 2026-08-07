@@ -1,0 +1,49 @@
+// header.scss
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #1e1e2f;
+  padding: 14px 32px;
+  border-bottom: 1px solid #2a2a3d;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  &__logo {
+    font-size: 22px;
+    font-weight: 600;
+    color: #c4b5fd;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+
+    &:hover {
+      color: #ddd6fe;
+    }
+  }
+
+  &__nav {
+    display: flex;
+    gap: 28px;
+
+    a {
+      color: #a5a5c0;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 500;
+      padding: 6px 0;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+
+      &:hover {
+        color: #ddd6fe;
+      }
+
+      &.active {
+        color: #c4b5fd;
+        border-bottom-color: #c4b5fd;
+      }
+    }
+  }
+}
