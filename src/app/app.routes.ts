@@ -6,7 +6,7 @@ import { CartoonsComponent } from './project/components/pages/cartoons/cartoons'
 import { LayoutComponent } from './project/layout/layout/layout';
 import { MainComponent } from './project/components/pages/main/main';
 import { TopFilmComponent } from './project/components/pages/top/top';
-import { TopFilmDetailComponent } from './project/components/top-film-detail/top-film-detail.component';
+import { TopFilmDetailComponent } from './project/components/pages/top-film-detail/top-film-detail.component';
 
 export const routes: Routes = [
   {

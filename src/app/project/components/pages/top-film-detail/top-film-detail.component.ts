@@ -1,34 +1,25 @@
 import { Component, inject, signal, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { tap } from 'rxjs';
 import { TopService } from '../../../../shared/services/top-service';
 import { FilmDetail } from '../../../../shared/interfaces/top-films.interface';
+import { FilmCard } from '../../../../shared/ui/component/film-card/film-card';
 
 @Component({
   selector: 'app-film-detail',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FilmCard],
   templateUrl: './top-film-detail.component.html',
   styleUrl: './top-film-detail.component.scss',
 })
 export class TopFilmDetailComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private topService = inject(TopService);
-  private backNavigate = inject(Router);
   film = signal<FilmDetail | null>(null);
 
   ngOnInit(): void {
     this.geDetails();
-  }
-
-  getCountries(): string {
-    const f = this.film();
-    if ( f!== null) {
-      return f.countries?.map((c: { country: string }) => c.country).join(', ') ?? '';
-    } else {
-      return '';
-    }
   }
 
   geDetails() {
@@ -36,9 +27,5 @@ export class TopFilmDetailComponent implements OnInit {
     this.topService.geDetailsFilms(id).pipe(
       tap(data => this.film.set(data))
     ).subscribe();
-  }
-
-  backToTopPage() {
-    this.backNavigate.navigate(['/top']);
   }
 }

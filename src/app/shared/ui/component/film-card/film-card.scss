@@ -1,0 +1,146 @@
+// top-film-detail.component.scss
+
+.detail {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  &__poster {
+    flex-shrink: 0;
+    width: 300px;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid #2a2a3d;
+
+    img {
+      width: 100%;
+      display: block;
+    }
+  }
+
+  &__info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #e2e2f0;
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  &__title-en {
+    font-size: 18px;
+    color: #6b6b85;
+    margin: -8px 0 0;
+  }
+
+  &__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 15px;
+    color: #a5a5c0;
+    align-items: center;
+  }
+
+  &__rating {
+    color: #c4b5fd;
+    font-weight: 600;
+    font-size: 16px;
+  }
+
+  &__votes {
+    color: #6b6b85;
+    font-size: 14px;
+  }
+
+  &__year {
+    background: #2a2a3d;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+  }
+
+  &__length {
+    background: #2a2a3d;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+  }
+
+  &__genres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  &__tag {
+    display: inline-block;
+    background: #2a2a3d;
+    color: #c4b5fd;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    border: 1px solid #3a3a5a;
+  }
+
+  &__countries {
+    font-size: 14px;
+    color: #6b6b85;
+  }
+
+  &__desc {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #a5a5c0;
+    background: #1e1e2f;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #2a2a3d;
+  }
+
+  &__loading {
+    text-align: center;
+    padding: 80px 0;
+    font-size: 18px;
+    color: #6b6b85;
+  }
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #2a2a3d;
+  color: #a5a5c0;
+  border: 1px solid #3a3a5a;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-bottom: 24px;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+
+  &:hover {
+    background: #3a3a5a;
+    color: #e2e2f0;
+    border-color: #5a5a7a;
+  }
+
+  &::before {
+    content: '←';
+    font-size: 16px;
+  }
+}
