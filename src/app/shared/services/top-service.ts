@@ -11,9 +11,9 @@ export class TopService {
   http = inject(HttpClient);
   apiUrl = 'https://kinopoiskapiunofficial.tech/api/v2.2';
 
-  getTopFilms(): Observable<TopFilmsResponse> {
+  getTopFilms(page = 1): Observable<TopFilmsResponse> {
     return this.http.get<TopFilmsResponse>(
-      this.apiUrl + '/films/top?type=TOP_250_BEST_FILMS&page=1',
+      `${this.apiUrl}/films/collections?type=TOP_250_MOVIES&page=${page}`,
       {
         headers: {
           'X-API-KEY': environment.kinopoiskApiKey,
