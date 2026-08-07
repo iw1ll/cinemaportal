@@ -2,7 +2,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { TopService } from '../../../../shared/services/top-service';
 import { Router } from '@angular/router';
 import { Film } from '../../../../shared/interfaces/top-films.interface';
-import { PaginationComponent } from '../../../../shared/ui/pagination/pagination.component';
+import { PaginationComponent } from '../../../../shared/ui/component/pagination/pagination.component';
 import { tap } from 'rxjs';
 
 @Component({
