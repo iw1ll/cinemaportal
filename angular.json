@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "kinoportal": {
+    "cinemaportal": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -61,10 +61,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "kinoportal:build:production"
+              "buildTarget": "cinemaportal:build:production"
             },
             "development": {
-              "buildTarget": "kinoportal:build:development"
+              "buildTarget": "cinemaportal:build:development"
             }
           },
           "defaultConfiguration": "development"
