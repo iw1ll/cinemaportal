@@ -30,7 +30,11 @@ export class TopFilmDetailComponent implements OnInit {
     ).subscribe();
   }
 
-  backToTopPage() {
-    this.backNavigate.navigate(['/top']);
-  }
+backToTopPage(): void {
+  const fromPage = this.route.snapshot.queryParams['fromPage'] || 1;
+  this.backNavigate.navigate(['/top'], {
+    queryParams: { page: fromPage }
+  });
+}
+
 }
