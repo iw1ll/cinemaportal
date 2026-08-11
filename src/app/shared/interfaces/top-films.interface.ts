@@ -78,3 +78,13 @@ export interface SimilarFilmsResponse {
   total: number;
   items: SimilarFilm[];
 }
+
+export interface StaffMember {
+  staffId: number;
+  nameRu: string;
+  nameEn: string | null;
+  description: string | null;
+  posterUrl: string;
+  professionText: string;
+  professionKey: 'DIRECTOR' | 'ACTOR' | 'WRITER' | 'PRODUCER' | 'OPERATOR' | 'COMPOSER';
+}

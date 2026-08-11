@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { catchError, forkJoin, of, tap } from 'rxjs';
 import { FilmService } from '../../../../shared/services/film-api-service';
-import { FilmDetail, SimilarFilm } from '../../../../shared/interfaces/top-films.interface';
+import { FilmDetail, SimilarFilm, StaffMember } from '../../../../shared/interfaces/top-films.interface';
 import { FilmCardComponent } from '../../../../shared/ui/component/film-card/film-card';
 import { FilmRecommended } from '../../../../shared/ui/component/film-recommended/film-recommended';
 import { PageState } from '../../../../shared/types/state.type';
@@ -30,8 +30,11 @@ export class TopFilmDetailComponent implements OnInit {
 
   /** Похожие фильмы */
   recommendedFilms = signal<SimilarFilm[] | null>(null);
-  /** Состояние загрузки рекомендаций (отдельно от фильма) */
+  /** Состояние загрузки рекомендаций */
   recommendedState = signal<PageState>('loading');
+
+  /**  */
+  staff = signal<StaffMember[] | null>(null);
 
   /** Загружаем фильм и рекомендации параллельно */
   ngOnInit(): void {
@@ -39,6 +42,7 @@ export class TopFilmDetailComponent implements OnInit {
     forkJoin([
       this.getDetails(id),
       this.getRecommendedFilms(id),
+      this.getStaff(id)
     ]).subscribe();
   }
 
@@ -49,6 +53,7 @@ export class TopFilmDetailComponent implements OnInit {
         this.film.set(data);
         this.state.set('success');
       }),
+      //доделать
     );
   }
 
@@ -67,6 +72,18 @@ export class TopFilmDetailComponent implements OnInit {
         this.recommendedState.set('error');
         return of();
       }),
+    );
+  }
+
+    /**  */
+  getStaff(id: number) {
+    return this.filmService.getStaff(id).pipe(
+      tap(data => {
+        this.staff.set(data);
+        console.log(this.staff())
+        // this.state.set('success');
+      }),
+      //доделать
     );
   }
 
