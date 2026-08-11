@@ -6,10 +6,11 @@ import { catchError, of, tap } from 'rxjs';
 import { NgTemplateOutlet } from '@angular/common';
 import { PageState } from '../../../../shared/types/state.type';
 import { FilmService } from '../../../../shared/services/film-api-service';
+import { LoaderComponent } from '../../../../shared/ui/component/loader/loader';
 
 @Component({
   selector: 'app-top',
-  imports: [PaginationComponent, NgTemplateOutlet],
+  imports: [PaginationComponent, NgTemplateOutlet, LoaderComponent],
   templateUrl: './top.html',
   styleUrl: './top.scss',
 })

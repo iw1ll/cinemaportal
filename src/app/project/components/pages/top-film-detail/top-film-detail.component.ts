@@ -4,14 +4,14 @@ import { CommonModule } from '@angular/common';
 import { tap } from 'rxjs';
 import { FilmService } from '../../../../shared/services/film-api-service';
 import { FilmDetail } from '../../../../shared/interfaces/top-films.interface';
-import { FilmCard } from '../../../../shared/ui/component/film-card/film-card';
+import { FilmCardComponent } from '../../../../shared/ui/component/film-card/film-card';
 import { FilmRecommended } from '../film-recommended/film-recommended';
 import { PageState } from '../../../../shared/types/state.type';
 
 @Component({
   selector: 'app-film-detail',
   standalone: true,
-  imports: [CommonModule, FilmCard, FilmRecommended],
+  imports: [CommonModule, FilmCardComponent, FilmRecommended],
   templateUrl: './top-film-detail.component.html',
   styleUrl: './top-film-detail.component.scss',
 })

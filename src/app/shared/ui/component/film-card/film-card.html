@@ -1,6 +1,8 @@
 @switch (state()) {
   @case ('loading') {
-    <div class="detail__loading">Загрузка...</div>
+    <div class="detail__loading">
+      <app-loader></app-loader>
+    </div>
   }
   @case ('success') {
     @if (film(); as filmData) {
