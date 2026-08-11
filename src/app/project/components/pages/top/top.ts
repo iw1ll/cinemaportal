@@ -5,9 +5,7 @@ import { Film } from '../../../../shared/interfaces/top-films.interface';
 import { PaginationComponent } from '../../../../shared/ui/component/pagination/pagination.component';
 import { catchError, of, tap } from 'rxjs';
 import { NgTemplateOutlet } from '@angular/common';
-
-/** Три возможных состояния страницы */
-type TopState = 'loading' | 'error' | 'success';
+import { PageState } from '../../../../shared/types/state.type';
 
 @Component({
   selector: 'app-top',
@@ -29,7 +27,7 @@ export class TopFilmComponent implements OnInit {
   /** Всего страниц */
   totalPages = signal(1);
   /** Состояние страницы*/
-  state = signal<TopState>('loading');
+  state = signal<PageState>('loading');
 
   ngOnInit(): void {
     const page = Number(this.route.snapshot.queryParams['page']) || 1;
