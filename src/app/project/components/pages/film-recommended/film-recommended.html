@@ -1,17 +1,33 @@
 <h3 class="recommended__title">Похожие фильмы</h3>
 
-<div class="recommended__grid">
-  @for (film of recommendedFilms(); track film.filmId) {
-    <div class="recommended__card">
-      <img
-        class="recommended__poster"
-        [src]="film.posterUrlPreview"
-        [alt]="film.nameRu"
-      />
-      <div class="recommended__info">
-        <span class="recommended__name">{{ film.nameRu }}</span>
-        <span class="recommended__original">{{ film.nameOriginal || film.nameEn }}</span>
-      </div>
+@switch (state()) {
+  @case ('loading') {
+    <div class="recommended__grid">
+      @for (i of [1, 2, 3, 4, 5, 6, 7]; track i) {
+        <div class="recommended__card skeleton">
+          <div class="recommended__poster skeleton-box"></div>
+          <div class="recommended__info">
+            <div class="skeleton-line"></div>
+            <div class="skeleton-line short"></div>
+          </div>
+        </div>
+      }
     </div>
   }
-</div>
+  @case ('error') {
+    <div class="error">Ошибка загрузки</div>
+  }
+  @case ('success') {
+    <div class="recommended__grid">
+      @for (film of recommendedFilms(); track film.filmId) {
+        <div class="recommended__card">
+          <img class="recommended__poster" [src]="film.posterUrlPreview" [alt]="film.nameRu" />
+          <div class="recommended__info">
+            <span class="recommended__name">{{ film.nameRu }}</span>
+            <span class="recommended__original">{{ film.nameOriginal || film.nameEn }}</span>
+          </div>
+        </div>
+      }
+    </div>
+  }
+}

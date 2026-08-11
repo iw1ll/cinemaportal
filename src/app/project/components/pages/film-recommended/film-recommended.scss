@@ -62,3 +62,25 @@
     text-overflow: ellipsis;
   }
 }
+
+.skeleton-box {
+  background: #2a2a3d;
+  animation: pulse 1.5s infinite;
+}
+
+.skeleton-line {
+  height: 14px;
+  background: #2a2a3d;
+  border-radius: 4px;
+  margin-bottom: 6px;
+  animation: pulse 1.5s infinite;
+
+  &.short {
+    width: 70%;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
