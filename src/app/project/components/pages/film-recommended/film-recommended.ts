@@ -1,44 +1,17 @@
-import { Component, effect, inject, input, signal } from '@angular/core';
-import { FilmService } from '../../../../shared/services/film-api-service';
-import { catchError, of, tap } from 'rxjs';
+import { Component, input, signal } from '@angular/core';
 import { SimilarFilm } from '../../../../shared/interfaces/top-films.interface';
 import { PageState } from '../../../../shared/types/state.type';
+import { LoaderComponent } from '../../../../shared/ui/component/loader/loader';
 
 @Component({
   selector: 'app-film-recommended',
-  imports: [],
+  standalone: true,
+  imports: [LoaderComponent],
   templateUrl: './film-recommended.html',
   styleUrl: './film-recommended.scss',
 })
 export class FilmRecommended {
-  filmId = input.required<number>();
   loading = signal(true);
-  private filmService = inject(FilmService);
-  recommendedFilms = signal<SimilarFilm[] | null>(null);
-  state = signal<PageState>('loading');
-
-  constructor() {
-    setTimeout(() => this.loading.set(false), 1500);
-    effect(() => {
-      const id = this.filmId();
-      if (id) {
-        this.getRecommendedFilms(id);
-      }
-  });
-  }
-
-    getRecommendedFilms(id: number) {
-      this.filmService.geSimilarFilms(id).pipe(
-        tap(data =>{
-          this.recommendedFilms.set(data.items);
-          this.state.set('success');
-        },
-      ),
-      catchError(() => {
-          this.state.set('error');
-          return of();
-        })
-      ).subscribe();
-    }
-
+  state = input<PageState>('loading');
+  recommendedFilms = input.required<SimilarFilm[] | null>();
 }

@@ -1,9 +1,9 @@
 <button class="back-btn" (click)="backToTopPage()">Назад к списку</button>
-<app-film-card [film]="film()" [state]="state()"></app-film-card>
+<app-film-card [film]="film()" [state]="state()"/>
 
 @if (film()) {
   @defer (when film() !== null) {
-    <app-film-recommended [filmId]="film()!.kinopoiskId" />
+    <app-film-recommended [recommendedFilms]="recommendedFilms()" [state]="state()"/>
   }
 }
 <!-- Добавим:
