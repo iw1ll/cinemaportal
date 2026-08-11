@@ -5,11 +5,13 @@ import { tap } from 'rxjs';
 import { TopService } from '../../../../shared/services/top-api-service';
 import { FilmDetail } from '../../../../shared/interfaces/top-films.interface';
 import { FilmCard } from '../../../../shared/ui/component/film-card/film-card';
+import { FilmRecommended } from '../film-recomended/film-recomended';
+import { PageState } from '../../../../shared/types/state.type';
 
 @Component({
   selector: 'app-film-detail',
   standalone: true,
-  imports: [CommonModule, FilmCard],
+  imports: [CommonModule, FilmCard, FilmRecommended],
   templateUrl: './top-film-detail.component.html',
   styleUrl: './top-film-detail.component.scss',
 })
@@ -18,6 +20,7 @@ export class TopFilmDetailComponent implements OnInit {
   private topService = inject(TopService);
   private backNavigate = inject(Router);
   film = signal<FilmDetail | null>(null);
+  state = signal<PageState>('loading');
 
   ngOnInit(): void {
     this.geDetails();
@@ -26,7 +29,11 @@ export class TopFilmDetailComponent implements OnInit {
   geDetails() {
     const id = this.route.snapshot.params['id'];
     this.topService.geDetailsFilms(id).pipe(
-      tap(data => this.film.set(data))
+      tap(data =>{
+        this.film.set(data);
+        this.state.set('success');
+      }
+    )
     ).subscribe();
   }
 
