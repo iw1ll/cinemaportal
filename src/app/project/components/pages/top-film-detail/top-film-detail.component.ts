@@ -16,47 +16,61 @@ import { PageState } from '../../../../shared/types/state.type';
   styleUrl: './top-film-detail.component.scss',
 })
 export class TopFilmDetailComponent implements OnInit {
+  /** Текущий маршрут для получения параметров */
   private route = inject(ActivatedRoute);
+  /** Сервис для запросов к API */
   private filmService = inject(FilmService);
+  /** Программная навигация */
   private backNavigate = inject(Router);
+
+  /** Данные фильма */
   film = signal<FilmDetail | null>(null);
+  /** Состояние загрузки фильма */
   state = signal<PageState>('loading');
+
+  /** Похожие фильмы */
   recommendedFilms = signal<SimilarFilm[] | null>(null);
+  /** Состояние загрузки рекомендаций (отдельно от фильма) */
   recommendedState = signal<PageState>('loading');
 
+  /** Загружаем фильм и рекомендации параллельно */
   ngOnInit(): void {
     const id = this.route.snapshot.params['id'];
-
-    forkJoin([this.getDetails(id), this.getRecommendedFilms(id)]).subscribe();
+    forkJoin([
+      this.getDetails(id),
+      this.getRecommendedFilms(id),
+    ]).subscribe();
   }
 
+  /** Запрос детальной информации о фильме */
   getDetails(id: number) {
     return this.filmService.geDetailsFilms(id).pipe(
-      tap(data =>{
+      tap(data => {
         this.film.set(data);
         this.state.set('success');
-      })
+      }),
     );
   }
 
+  /** Запрос похожих фильмов */
   getRecommendedFilms(id: number) {
     return this.filmService.geSimilarFilms(id).pipe(
-      tap(data =>{
+      tap(data => {
         this.recommendedFilms.set(data.items);
-        this.recommendedState = signal<PageState>('success');
-      },
-    ),
-    catchError(() => {
+        this.recommendedState.set('success');
+      }),
+      catchError(() => {
         this.recommendedState.set('error');
         return of();
-      })
+      }),
     );
   }
 
+  /** Возврат к списку с сохранением страницы */
   backToTopPage(): void {
     const fromPage = this.route.snapshot.queryParams['fromPage'] || 1;
     this.backNavigate.navigate(['/top'], {
-      queryParams: { page: fromPage }
+      queryParams: { page: fromPage },
     });
   }
 }
