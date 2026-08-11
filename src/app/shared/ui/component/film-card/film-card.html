@@ -1,40 +1,47 @@
-@if (film(); as filmData) {
-  <div class="detail">
-    <div class="detail__poster">
-      <img [src]="filmData.posterUrl" [alt]="filmData.nameRu" />
-    </div>
-    <div class="detail__info">
-      <h1 class="detail__title">{{ filmData.nameRu }}</h1>
-      @if (filmData.nameEn) {
-        <p class="detail__title-en">{{ filmData.nameEn }}</p>
-      }
+@switch (state()) {
+  @case ('loading') {
+    <div class="detail__loading">Загрузка...</div>
+  }
+  @case ('success') {
+    @if (film(); as filmData) {
+      <div class="detail">
+        <div class="detail__poster">
+          <img [src]="filmData.posterUrl" [alt]="filmData.nameRu" />
+        </div>
+        <div class="detail__info">
+          <h1 class="detail__title">{{ filmData.nameRu }}</h1>
+          @if (filmData.nameEn) {
+            <p class="detail__title-en">{{ filmData.nameEn }}</p>
+          }
 
-      <div class="detail__meta">
-        <span class="detail__rating">⭐ {{ filmData.ratingKinopoisk }}</span>
-        <span class="detail__votes">{{ filmData.ratingKinopoiskVoteCount | number }} оценок</span>
-        <span class="detail__year">{{ filmData.year }}</span>
-        <span class="detail__length">{{ filmData.filmLength }}</span>
-      </div>
+          <div class="detail__meta">
+            <span class="detail__rating">⭐ {{ filmData.ratingKinopoisk }}</span>
+            <span class="detail__votes"
+              >{{ filmData.ratingKinopoiskVoteCount | number }} оценок</span
+            >
+            <span class="detail__year">{{ filmData.year }}</span>
+            <span class="detail__length">{{ filmData.filmLength }}</span>
+          </div>
 
-      @if (filmData.genres.length) {
-        <div class="detail__genres">
-          @for (g of filmData.genres; track g.genre) {
-            <span class="detail__tag">{{ g.genre }}</span>
+          @if (filmData.genres.length) {
+            <div class="detail__genres">
+              @for (g of filmData.genres; track g.genre) {
+                <span class="detail__tag">{{ g.genre }}</span>
+              }
+            </div>
+          }
+
+          @if (filmData.countries.length) {
+            <p class="detail__countries">🌍 {{ getCountries() }}</p>
+          }
+
+          @if (filmData.description) {
+            <p class="detail__desc">{{ filmData.description }}</p>
           }
         </div>
-      }
-
-      @if (filmData.countries.length) {
-        <p class="detail__countries">
-          🌍 {{ getCountries() }}
-        </p>
-      }
-
-      @if (filmData.description) {
-        <p class="detail__desc">{{ filmData.description }}</p>
-      }
-    </div>
-  </div>
-} @else {
-  <div class="detail__loading">Загрузка...</div>
+      </div>
+    } @else {
+      <div class="detail__loading">Загрузка...</div>
+    }
+  }
 }

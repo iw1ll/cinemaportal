@@ -1,6 +1,7 @@
-import { Component, input, OnInit } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { FilmDetail } from '../../../interfaces/top-films.interface';
 import { CommonModule } from '@angular/common';
+import { PageState } from '../../../types/state.type';
 
 @Component({
   selector: 'app-film-card',
@@ -9,12 +10,9 @@ import { CommonModule } from '@angular/common';
   templateUrl: './film-card.html',
   styleUrl: './film-card.scss',
 })
-export class FilmCard implements OnInit {
+export class FilmCard {
   film = input.required<FilmDetail | null>();
-
-  ngOnInit(): void {
-    console.log(this.film());
-  }
+  state = input.required<PageState>();
 
   getCountries(): string {
     const f = this.film();
