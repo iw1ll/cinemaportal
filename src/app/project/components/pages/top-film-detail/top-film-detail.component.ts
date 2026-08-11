@@ -1,11 +1,11 @@
 import { Component, inject, signal, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { catchError, of, tap } from 'rxjs';
+import { catchError, forkJoin, of, tap } from 'rxjs';
 import { FilmService } from '../../../../shared/services/film-api-service';
 import { FilmDetail, SimilarFilm } from '../../../../shared/interfaces/top-films.interface';
 import { FilmCardComponent } from '../../../../shared/ui/component/film-card/film-card';
-import { FilmRecommended } from '../film-recommended/film-recommended';
+import { FilmRecommended } from '../../../../shared/ui/component/film-recommended/film-recommended';
 import { PageState } from '../../../../shared/types/state.type';
 
 @Component({
@@ -22,37 +22,35 @@ export class TopFilmDetailComponent implements OnInit {
   film = signal<FilmDetail | null>(null);
   state = signal<PageState>('loading');
   recommendedFilms = signal<SimilarFilm[] | null>(null);
+  recommendedState = signal<PageState>('loading');
 
   ngOnInit(): void {
     const id = this.route.snapshot.params['id'];
 
-    this.getDetails(id);
-    this.getRecommendedFilms(id);
+    forkJoin([this.getDetails(id), this.getRecommendedFilms(id)]).subscribe();
   }
 
   getDetails(id: number) {
-    this.filmService.geDetailsFilms(id).pipe(
+    return this.filmService.geDetailsFilms(id).pipe(
       tap(data =>{
         this.film.set(data);
         this.state.set('success');
-      }
-    )
-    ).subscribe();
+      })
+    );
   }
 
   getRecommendedFilms(id: number) {
-    this.filmService.geSimilarFilms(id).pipe(
+    return this.filmService.geSimilarFilms(id).pipe(
       tap(data =>{
         this.recommendedFilms.set(data.items);
-        console.log(this.recommendedFilms());
-        this.state.set('success');
+        this.recommendedState = signal<PageState>('success');
       },
     ),
     catchError(() => {
-        this.state.set('error');
+        this.recommendedState.set('error');
         return of();
       })
-    ).subscribe();
+    );
   }
 
   backToTopPage(): void {
@@ -61,5 +59,4 @@ export class TopFilmDetailComponent implements OnInit {
       queryParams: { page: fromPage }
     });
   }
-
 }

@@ -3,7 +3,7 @@
 
 @if (film()) {
   @defer (when film() !== null) {
-    <app-film-recommended [recommendedFilms]="recommendedFilms()" [state]="state()"/>
+    <app-film-recommended [recommendedFilms]="recommendedFilms()" [state]="recommendedState()"/>
   }
 }
 <!-- Добавим:
