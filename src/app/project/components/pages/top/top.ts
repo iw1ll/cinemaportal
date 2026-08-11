@@ -6,6 +6,7 @@ import { PaginationComponent } from '../../../../shared/ui/component/pagination/
 import { catchError, of, tap } from 'rxjs';
 import { NgTemplateOutlet } from '@angular/common';
 
+/** Три возможных состояния страницы */
 type TopState = 'loading' | 'error' | 'success';
 
 @Component({
@@ -14,24 +15,28 @@ type TopState = 'loading' | 'error' | 'success';
   templateUrl: './top.html',
   styleUrl: './top.scss',
 })
-
 export class TopFilmComponent implements OnInit {
+  /** Сервис для запросов */
   topService = inject(TopService);
+  /** Список фильмов текущей страницы */
   topFilms = signal<Film[]>([]);
+  /** Программная навигация */
   private router = inject(Router);
+  /** Доступ к query-параметрам URL */
   private route = inject(ActivatedRoute);
-
+  /** Текущая страница */
   currentPage = signal(1);
+  /** Всего страниц */
   totalPages = signal(1);
+  /** Состояние страницы*/
   state = signal<TopState>('loading');
-
 
   ngOnInit(): void {
     const page = Number(this.route.snapshot.queryParams['page']) || 1;
     this.getTopFilms(page);
   }
 
-
+  /** Загружает фильмы */
   getTopFilms(page: number): void {
     this.router.navigate([], {
       queryParams: { page },
@@ -54,13 +59,14 @@ export class TopFilmComponent implements OnInit {
     ).subscribe();
   }
 
+  /** Переход на страницу фильма */
   goToFilm(filmId: number): void {
     this.router.navigate(['/film', filmId], {
       queryParams: { fromPage: this.currentPage() }
     });
   }
 
-
+  /** Предыдущая страница */
   prevPage(): void {
     if (this.currentPage() > 1) {
       this.getTopFilms(this.currentPage() - 1);
@@ -68,6 +74,7 @@ export class TopFilmComponent implements OnInit {
     }
   }
 
+  /** Следующая страница */
   nextPage(): void {
     if (this.currentPage() < this.totalPages()) {
       this.getTopFilms(this.currentPage() + 1);
