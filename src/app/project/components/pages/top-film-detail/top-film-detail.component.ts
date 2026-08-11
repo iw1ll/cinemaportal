@@ -5,7 +5,7 @@ import { tap } from 'rxjs';
 import { FilmService } from '../../../../shared/services/film-api-service';
 import { FilmDetail } from '../../../../shared/interfaces/top-films.interface';
 import { FilmCard } from '../../../../shared/ui/component/film-card/film-card';
-import { FilmRecommended } from '../film-recomended/film-recomended';
+import { FilmRecommended } from '../film-recommended/film-recommended';
 import { PageState } from '../../../../shared/types/state.type';
 
 @Component({
@@ -23,10 +23,10 @@ export class TopFilmDetailComponent implements OnInit {
   state = signal<PageState>('loading');
 
   ngOnInit(): void {
-    this.geDetails();
+    this.getDetails();
   }
 
-  geDetails() {
+  getDetails() {
     const id = this.route.snapshot.params['id'];
     this.filmService.geDetailsFilms(id).pipe(
       tap(data =>{
