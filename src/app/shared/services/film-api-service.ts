@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { FilmDetail, TopFilmsResponse } from '../interfaces/top-films.interface';
+import { FilmDetail, SimilarFilmsResponse, TopFilmsResponse } from '../interfaces/top-films.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -26,6 +26,13 @@ export class FilmService {
   geDetailsFilms(id: number): Observable<FilmDetail> {
     return this.http
       .get<FilmDetail>(`https://kinopoiskapiunofficial.tech/api/v2.2/films/${id}`, {
+        headers: { 'X-API-KEY': environment.kinopoiskApiKey },
+      });
+  }
+
+  geSimilarFilms(id: number): Observable<SimilarFilmsResponse> {
+    return this.http
+      .get<SimilarFilmsResponse>(`https://kinopoiskapiunofficial.tech/api/v2.2/films/${id}/similars`, {
         headers: { 'X-API-KEY': environment.kinopoiskApiKey },
       });
   }
