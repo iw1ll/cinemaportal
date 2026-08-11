@@ -63,3 +63,18 @@ export interface FilmDetail {
   has3D: boolean;
   lastSync: string;
 }
+
+export interface SimilarFilm {
+  filmId: number;
+  nameRu: string;
+  nameEn: string | null;
+  nameOriginal: string | null;
+  posterUrl: string;
+  posterUrlPreview: string;
+  relationType: 'SIMILAR';
+}
+
+export interface SimilarFilmsResponse {
+  total: number;
+  items: SimilarFilm[];
+}
