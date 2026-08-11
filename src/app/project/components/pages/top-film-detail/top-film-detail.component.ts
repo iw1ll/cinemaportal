@@ -2,7 +2,7 @@ import { Component, inject, signal, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { tap } from 'rxjs';
-import { TopService } from '../../../../shared/services/top-api-service';
+import { FilmService } from '../../../../shared/services/film-api-service';
 import { FilmDetail } from '../../../../shared/interfaces/top-films.interface';
 import { FilmCard } from '../../../../shared/ui/component/film-card/film-card';
 import { FilmRecommended } from '../film-recomended/film-recomended';
@@ -17,7 +17,7 @@ import { PageState } from '../../../../shared/types/state.type';
 })
 export class TopFilmDetailComponent implements OnInit {
   private route = inject(ActivatedRoute);
-  private topService = inject(TopService);
+  private filmService = inject(FilmService);
   private backNavigate = inject(Router);
   film = signal<FilmDetail | null>(null);
   state = signal<PageState>('loading');
@@ -28,7 +28,7 @@ export class TopFilmDetailComponent implements OnInit {
 
   geDetails() {
     const id = this.route.snapshot.params['id'];
-    this.topService.geDetailsFilms(id).pipe(
+    this.filmService.geDetailsFilms(id).pipe(
       tap(data =>{
         this.film.set(data);
         this.state.set('success');

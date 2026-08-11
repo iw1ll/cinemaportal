@@ -7,7 +7,7 @@ import { FilmDetail, TopFilmsResponse } from '../interfaces/top-films.interface'
 @Injectable({
   providedIn: 'root',
 })
-export class TopService {
+export class FilmService {
   http = inject(HttpClient);
   apiUrl = 'https://kinopoiskapiunofficial.tech/api/v2.2';
 

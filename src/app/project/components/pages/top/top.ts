@@ -1,11 +1,11 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { TopService } from '../../../../shared/services/top-service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Film } from '../../../../shared/interfaces/top-films.interface';
 import { PaginationComponent } from '../../../../shared/ui/component/pagination/pagination.component';
 import { catchError, of, tap } from 'rxjs';
 import { NgTemplateOutlet } from '@angular/common';
 import { PageState } from '../../../../shared/types/state.type';
+import { FilmService } from '../../../../shared/services/film-api-service';
 
 @Component({
   selector: 'app-top',
@@ -15,7 +15,7 @@ import { PageState } from '../../../../shared/types/state.type';
 })
 export class TopFilmComponent implements OnInit {
   /** Сервис для запросов */
-  topService = inject(TopService);
+  filmService = inject(FilmService);
   /** Список фильмов текущей страницы */
   topFilms = signal<Film[]>([]);
   /** Программная навигация */
@@ -44,7 +44,7 @@ export class TopFilmComponent implements OnInit {
     this.state.set('loading');
     this.currentPage.set(page);
 
-    this.topService.getTopFilms(page).pipe(
+    this.filmService.getTopFilms(page).pipe(
       tap(response => {
         this.topFilms.set(response.items);
         this.totalPages.set(response.totalPages);
