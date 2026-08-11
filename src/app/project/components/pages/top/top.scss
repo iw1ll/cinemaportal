@@ -66,3 +66,25 @@ h2 {
     margin-top: auto;
   }
 }
+
+.skeleton-box {
+  background: #2a2a3d;
+  animation: pulse 1.5s infinite;
+}
+
+.skeleton-line {
+  height: 16px;
+  background: #2a2a3d;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  animation: pulse 1.5s infinite;
+
+  &.short {
+    width: 60%;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}

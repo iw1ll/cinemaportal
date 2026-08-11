@@ -7,22 +7,42 @@
   (next)="nextPage()"
 />
 
-@if (loading()) {
-  <div class="loading">Загрузка...</div>
-}
-
-<div class="grid">
-  @for (film of topFilms(); track film.kinopoiskId) {
-    <div class="card" (click)="goToFilm(film.kinopoiskId)">
-      <img class="card__poster" [src]="film.posterUrlPreview" [alt]="film.nameRu" />
-      <div class="card__info">
-        <span class="card__title">{{ film.nameRu }}</span>
-        <span class="card__year">{{ film.year }}</span>
-        <span class="card__rating">⭐ {{ film.ratingKinopoisk }}</span>
-      </div>
+@switch (state()) {
+  @case ('loading') {
+    <div class="grid">
+      @for (i of [1,2,3,4,5,6]; track i) {
+        <ng-container *ngTemplateOutlet="skeletonTpl" />
+      }
     </div>
   }
-</div>
+  @case ('error') {
+    <div class="error">Ошибка загрузки</div>
+  }
+  @case ('success') {
+    <div class="grid">
+      @for (film of topFilms(); track film.kinopoiskId) {
+        <div class="card" (click)="goToFilm(film.kinopoiskId)">
+          <img class="card__poster" [src]="film.posterUrlPreview" [alt]="film.nameRu" />
+          <div class="card__info">
+            <span class="card__title">{{ film.nameRu }}</span>
+            <span class="card__year">{{ film.year }}</span>
+            <span class="card__rating">⭐ {{ film.ratingKinopoisk }}</span>
+          </div>
+        </div>
+      }
+    </div>
+  }
+}
+
+<ng-template #skeletonTpl>
+  <div class="card skeleton">
+    <div class="card__poster skeleton-box"></div>
+    <div class="card__info">
+      <div class="skeleton-line"></div>
+      <div class="skeleton-line short"></div>
+    </div>
+  </div>
+</ng-template>
 
 <app-pagination
   [currentPage]="currentPage()"

@@ -3,14 +3,18 @@ import { TopService } from '../../../../shared/services/top-service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Film } from '../../../../shared/interfaces/top-films.interface';
 import { PaginationComponent } from '../../../../shared/ui/component/pagination/pagination.component';
-import { finalize, tap } from 'rxjs';
+import { catchError, of, tap } from 'rxjs';
+import { NgTemplateOutlet } from '@angular/common';
+
+type TopState = 'loading' | 'error' | 'success';
 
 @Component({
   selector: 'app-top',
-  imports: [PaginationComponent],
+  imports: [PaginationComponent, NgTemplateOutlet],
   templateUrl: './top.html',
   styleUrl: './top.scss',
 })
+
 export class TopFilmComponent implements OnInit {
   topService = inject(TopService);
   topFilms = signal<Film[]>([]);
@@ -19,7 +23,8 @@ export class TopFilmComponent implements OnInit {
 
   currentPage = signal(1);
   totalPages = signal(1);
-  loading = signal(false);
+  state = signal<TopState>('loading');
+
 
   ngOnInit(): void {
     const page = Number(this.route.snapshot.queryParams['page']) || 1;
@@ -33,16 +38,18 @@ export class TopFilmComponent implements OnInit {
       replaceUrl: true,
     });
 
-    this.loading.set(true);
+    this.state.set('loading');
     this.currentPage.set(page);
 
     this.topService.getTopFilms(page).pipe(
       tap(response => {
         this.topFilms.set(response.items);
         this.totalPages.set(response.totalPages);
-    }),
-      finalize(() => {
-        this.loading.set(false);
+        this.state.set('success');
+      }),
+      catchError(() => {
+        this.state.set('error');
+        return of();
       })
     ).subscribe();
   }
