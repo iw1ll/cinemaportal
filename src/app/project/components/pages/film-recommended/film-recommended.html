@@ -1,0 +1,17 @@
+<h3 class="recommended__title">Похожие фильмы</h3>
+
+<div class="recommended__grid">
+  @for (film of recommendedFilms(); track film.filmId) {
+    <div class="recommended__card">
+      <img
+        class="recommended__poster"
+        [src]="film.posterUrlPreview"
+        [alt]="film.nameRu"
+      />
+      <div class="recommended__info">
+        <span class="recommended__name">{{ film.nameRu }}</span>
+        <span class="recommended__original">{{ film.nameOriginal || film.nameEn }}</span>
+      </div>
+    </div>
+  }
+</div>
