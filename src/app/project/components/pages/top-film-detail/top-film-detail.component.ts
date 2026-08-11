@@ -57,7 +57,11 @@ export class TopFilmDetailComponent implements OnInit {
     return this.filmService.geSimilarFilms(id).pipe(
       tap(data => {
         this.recommendedFilms.set(data.items);
-        this.recommendedState.set('success');
+        if (data.items.length === 0) {
+          this.recommendedState.set('empty');
+        } else {
+          this.recommendedState.set('success');
+        }
       }),
       catchError(() => {
         this.recommendedState.set('error');
