@@ -61,6 +61,16 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
+
+  &__empty {
+  text-align: center;
+  padding: 32px 0;
+  color: #6b6b85;
+  font-size: 15px;
+  background: #1e1e2f;
+  border-radius: 12px;
+  border: 1px solid #2a2a3d;
+}
 }
 
 .skeleton-box {
