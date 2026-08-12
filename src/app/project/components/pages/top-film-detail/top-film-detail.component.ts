@@ -81,7 +81,7 @@ export class TopFilmDetailComponent implements OnInit {
     );
   }
 
-  /**  */
+  /** Запрос актёров и съёмочной группы */
   getStaff(id: number): Observable<StaffMember[]> {
     return this.actorService.getStaff(id).pipe(
       tap(data => {
