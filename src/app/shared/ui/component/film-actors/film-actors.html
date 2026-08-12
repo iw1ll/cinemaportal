@@ -2,7 +2,7 @@
 
 <div class="actors__grid">
   @for (actor of visibleActors; track actor.staffId) {
-    <div class="actors__item">
+    <div class="actors__item" (click)="actorClick.emit(actor.staffId)">
       <img
         class="actors__photo"
         [src]="actor.posterUrl"

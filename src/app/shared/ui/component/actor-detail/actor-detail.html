@@ -1,0 +1,74 @@
+<!-- actor-detail.html -->
+
+<div class="actor">
+  <div class="actor__header">
+    <div class="actor__poster">
+      <img [src]="person().posterUrl" [alt]="person().nameRu" />
+    </div>
+    <div class="actor__info">
+      <h1 class="actor__name">{{ person().nameRu }}</h1>
+      @if (person().nameEn) {
+        <p class="actor__name-en">{{ person().nameEn }}</p>
+      }
+      <p class="actor__profession">{{ person().profession }}</p>
+
+      <div class="actor__meta">
+        <span class="actor__age">{{ person().age }} лет</span>
+        <p class="actor__birthday">Дата рождения: {{ person().birthday | date:'d MMMM yyyy' }}</p>
+        @if (person().death) {
+          <p class="actor__death">Дата смерти: {{ person().death | date:'d MMMM yyyy' }}</p>
+        }
+        <span class="actor__growth">Рост: {{ person().growth }} см</span>
+        <span class="actor__sex">{{ person().sex === 'MALE' ? '♂' : '♀' }}</span>
+      </div>
+
+      <p class="actor__birthplace">📍 {{ person().birthplace }}</p>
+      @if (person().deathplace) {
+        <p class="actor__deathplace">🪦 {{ person().deathplace }}</p>
+      }
+    </div>
+  </div>
+
+  @if (person().facts.length) {
+    <div class="actor__section">
+      <h2>Факты</h2>
+      <ul class="actor__facts">
+        @for (fact of person().facts; track $index) {
+          <li>{{ fact }}</li>
+        }
+      </ul>
+    </div>
+  }
+
+  @if (person().spouses.length) {
+    <div class="actor__section">
+      <h2>Семья</h2>
+      <div class="actor__spouses">
+        @for (spouse of person().spouses; track spouse.personId) {
+          <div class="actor__spouse">
+            <span class="actor__spouse-name">{{ spouse.name }}</span>
+            <span class="actor__spouse-relation">{{ spouse.relation }}</span>
+            <span class="actor__spouse-children">Дети: {{ spouse.children }}</span>
+          </div>
+        }
+      </div>
+    </div>
+  }
+
+  @if (person().films.length) {
+    <div class="actor__section">
+      <h2>Фильмография ({{ person().films.length }})</h2>
+      <div class="actor__films">
+        @for (film of person().films; track $index) {
+          <div class="actor__film">
+            <span class="actor__film-name">{{ film.nameRu || film.nameEn }}</span>
+            <span class="actor__film-role">{{ film.description }}</span>
+            @if (film.rating) {
+              <span class="actor__film-rating">⭐ {{ film.rating }}</span>
+            }
+          </div>
+        }
+      </div>
+    </div>
+  }
+</div>

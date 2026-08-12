@@ -3,7 +3,12 @@
 
 <div class="detail-layout">
   <app-film-card [film]="film()" [state]="state()" />
-  <app-film-actors [staff]="staff()" (viewAll)="goToCast()" />
+
+  <app-film-actors
+    (actorClick)="goToActor($event)"
+    [staff]="staff()" (viewAll)="goToCast()"
+    (actorClick)="goToActor($event)"
+  />
 </div>
 
 @if (film()) {

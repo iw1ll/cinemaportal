@@ -111,4 +111,8 @@ export class TopFilmDetailComponent implements OnInit {
   goToCast(): void {
     this.navigate.navigate(['/film', this.film()!.kinopoiskId, 'cast']);
   }
+
+  goToActor(staffId: number): void {
+    this.navigate.navigate(['/actor', staffId]);
+  }
 }

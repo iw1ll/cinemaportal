@@ -1,0 +1,11 @@
+@switch (state()) {
+  @case ('loading') {
+    <app-loader />
+  }
+  @case ('error') {
+    <p>Ошибка загрузки</p>
+  }
+  @case ('success') {
+    <app-actor-detail [person]="person()!" />
+  }
+}

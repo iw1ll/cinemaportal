@@ -16,6 +16,8 @@ export class FilmActorsComponent {
   limit = input(10);
   /** Клик по кнопке "Весь каст" */
   viewAll = output<void>();
+  /** Клик по актёру — передаём staffId наверх */
+  actorClick = output<number>();
 
   /** Только актёры, ограниченное количество */
   get visibleActors(): StaffMember[] {

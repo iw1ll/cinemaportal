@@ -1,0 +1,189 @@
+.actor {
+  max-width: 1000px;
+  margin: 0 auto;
+
+  &__header {
+    display: flex;
+    gap: 32px;
+    align-items: flex-start;
+    margin-bottom: 40px;
+  }
+
+  &__poster {
+    width: 280px;
+    flex-shrink: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid #2a2a3d;
+
+    img {
+      width: 100%;
+      display: block;
+    }
+  }
+
+  &__info {
+    flex: 1;
+  }
+
+  &__name {
+    font-size: 32px;
+    font-weight: 700;
+    color: #e2e2f0;
+    margin: 0 0 4px;
+  }
+
+  &__name-en {
+    font-size: 18px;
+    color: #6b6b85;
+    margin: 0 0 12px;
+  }
+
+  &__profession {
+    font-size: 16px;
+    color: #c4b5fd;
+    margin: 0 0 16px;
+  }
+
+  &__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 12px;
+    font-size: 14px;
+    color: #a5a5c0;
+
+    p {
+      margin: 0;
+      font-size: 14px;
+      color: #a5a5c0;
+    }
+
+    .actor__age,
+    .actor__growth,
+    .actor__sex {
+      background: #2a2a3d;
+      padding: 4px 10px;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+
+    .actor__birthday,
+    .actor__death {
+      width: 100%;
+      padding: 4px 0;
+    }
+
+    .actor__death {
+      color: #8b6b6b;
+    }
+  }
+
+  &__birthplace,
+  &__deathplace {
+    font-size: 14px;
+    color: #6b6b85;
+    margin: 4px 0;
+  }
+
+  &__section {
+    margin-bottom: 32px;
+
+    h2 {
+      font-size: 20px;
+      font-weight: 600;
+      color: #e2e2f0;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #2a2a3d;
+    }
+  }
+
+  &__facts {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    li {
+      font-size: 14px;
+      color: #a5a5c0;
+      line-height: 1.5;
+      padding-left: 16px;
+      position: relative;
+
+      &::before {
+        content: '•';
+        position: absolute;
+        left: 0;
+        color: #c4b5fd;
+      }
+    }
+  }
+
+  &__spouses {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__spouse {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    font-size: 14px;
+    color: #a5a5c0;
+    background: #1e1e2f;
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: 1px solid #2a2a3d;
+
+    &-name {
+      font-weight: 600;
+      color: #e2e2f0;
+    }
+
+    &-relation {
+      color: #c4b5fd;
+    }
+
+    &-children {
+      margin-left: auto;
+      color: #6b6b85;
+      font-size: 13px;
+    }
+  }
+
+  &__films {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__film {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    font-size: 14px;
+    color: #a5a5c0;
+    padding: 6px 0;
+    border-bottom: 1px solid #1e1e2f;
+
+    &-name {
+      font-weight: 500;
+      color: #e2e2f0;
+      min-width: 200px;
+    }
+
+    &-role {
+      color: #6b6b85;
+      flex: 1;
+    }
+
+    &-rating {
+      color: #c4b5fd;
+      font-size: 13px;
+    }
+  }
+}
