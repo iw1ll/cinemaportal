@@ -1,8 +1,8 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FilmService } from '../../../services/film-api-service';
 import { StaffMember } from '../../../interfaces/top-films.interface';
 import { LoaderComponent } from '../loader/loader';
+import { ActorService } from '../../../services/actor-api.service';
 
 @Component({
   selector: 'app-film-cast',
@@ -13,14 +13,14 @@ import { LoaderComponent } from '../loader/loader';
 })
 export class FilmCastComponent implements OnInit {
   private route = inject(ActivatedRoute);
-  private filmService = inject(FilmService);
+  private actorService = inject(ActorService);
 
   staff = signal<StaffMember[]>([]);
   loading = signal(true);
 
   ngOnInit(): void {
     const id = this.route.snapshot.params['id'];
-    this.filmService.getStaff(id).subscribe(data => {
+    this.actorService.getStaff(id).subscribe(data => {
       this.staff.set(data);
       this.loading.set(false);
     });

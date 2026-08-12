@@ -5,8 +5,8 @@ import { PaginationComponent } from '../../../../shared/ui/component/pagination/
 import { catchError, of, tap } from 'rxjs';
 import { NgTemplateOutlet } from '@angular/common';
 import { PageState } from '../../../../shared/types/state.type';
-import { FilmService } from '../../../../shared/services/film-api-service';
 import { LoaderComponent } from '../../../../shared/ui/component/loader/loader';
+import { FilmService } from '../../../../shared/services/film-api.service';
 
 @Component({
   selector: 'app-top',
