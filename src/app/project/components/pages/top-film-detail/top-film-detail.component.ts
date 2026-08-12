@@ -53,7 +53,7 @@ export class TopFilmDetailComponent implements OnInit {
   }
 
   /** Запрос детальной информации о фильме */
-  getDetails(id: number) {
+  getDetails(id: number): Observable<FilmDetail> {
     return this.filmService.geDetailsFilms(id).pipe(
       tap(data => {
         this.film.set(data);
@@ -82,7 +82,7 @@ export class TopFilmDetailComponent implements OnInit {
   }
 
   /**  */
-  getStaff(id: number) {
+  getStaff(id: number): Observable<StaffMember[]> {
     return this.actorService.getStaff(id).pipe(
       tap(data => {
         this.staff.set(data);
