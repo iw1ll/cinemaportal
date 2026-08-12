@@ -1,10 +1,9 @@
+<!-- Вынести кнопку в отдельный компонент -->
 <button class="back-btn" (click)="backToTopPage()">Назад к списку</button>
+
 <div class="detail-layout">
   <app-film-card [film]="film()" [state]="state()" />
-
-  <!-- @if (staff().length) { -->
-    <app-film-actors [staff]="staff()" (viewAll)="goToCast()" />
-  <!-- } -->
+  <app-film-actors [staff]="staff()" (viewAll)="goToCast()" />
 </div>
 
 @if (film()) {

@@ -2,12 +2,13 @@ import { Component, inject, signal, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { catchError, forkJoin, of, tap } from 'rxjs';
-import { FilmService } from '../../../../shared/services/film-api-service';
 import { FilmDetail, SimilarFilm, StaffMember } from '../../../../shared/interfaces/top-films.interface';
 import { FilmCardComponent } from '../../../../shared/ui/component/film-card/film-card';
 import { FilmRecommended } from '../../../../shared/ui/component/film-recommended/film-recommended';
 import { PageState } from '../../../../shared/types/state.type';
 import { FilmActorsComponent } from '../../../../shared/ui/component/film-actors/film-actors';
+import { ActorService } from '../../../../shared/services/actor-api.service';
+import { FilmService } from '../../../../shared/services/film-api.service';
 
 @Component({
   selector: 'app-film-detail',
@@ -19,8 +20,10 @@ import { FilmActorsComponent } from '../../../../shared/ui/component/film-actors
 export class TopFilmDetailComponent implements OnInit {
   /** Текущий маршрут для получения параметров */
   private route = inject(ActivatedRoute);
-  /** Сервис для запросов к API */
+  /** Сервис для запросов к API по фильмам */
   private filmService = inject(FilmService);
+  /** Сервис для запросов к API по фильмам */
+  private actorService = inject(ActorService);
   /** Программная навигация */
   private backNavigate = inject(Router);
 
@@ -78,7 +81,7 @@ export class TopFilmDetailComponent implements OnInit {
 
   /**  */
   getStaff(id: number) {
-    return this.filmService.getStaff(id).pipe(
+    return this.actorService.getStaff(id).pipe(
       tap(data => {
         this.staff.set(data);
         console.log(this.staff())
