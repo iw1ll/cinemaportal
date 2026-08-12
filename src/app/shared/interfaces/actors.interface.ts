@@ -1,5 +1,4 @@
-// shared/interfaces/person-detail.interface.ts
-
+/** Супруг/супруга персоны */
 export interface Spouse {
   personId: number;
   name: string;
@@ -11,6 +10,7 @@ export interface Spouse {
   relation: string;
 }
 
+/** Фильм в фильмографии персоны */
 export interface Filmography {
   filmId: number;
   nameRu: string | null;
@@ -21,6 +21,7 @@ export interface Filmography {
   professionKey: 'ACTOR' | 'DIRECTOR' | 'WRITER' | 'PRODUCER' | 'OPERATOR' | 'COMPOSER' | 'HIMSELF' | 'HRONO_TITR_MALE';
 }
 
+/** Полная информация о персоне (актёр, режиссёр) */
 export interface PersonDetail {
   personId: number;
   webUrl: string;

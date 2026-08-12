@@ -1,3 +1,4 @@
+/** Краткая информация о фильме для списков */
 export interface Film {
   kinopoiskId: number;
   nameRu: string;
@@ -10,12 +11,14 @@ export interface Film {
   countries: { country: string }[];
 }
 
+/** Ответ API для списка фильмов */
 export interface TopFilmsResponse {
   total: number;
   totalPages: number;
   items: Film[];
 }
 
+/** Полная информация о фильме */
 export interface FilmDetail {
   kinopoiskId: number;
   kinopoiskHDId: string;
@@ -64,6 +67,7 @@ export interface FilmDetail {
   lastSync: string;
 }
 
+/** Похожий фильм */
 export interface SimilarFilm {
   filmId: number;
   nameRu: string;
@@ -74,11 +78,13 @@ export interface SimilarFilm {
   relationType: 'SIMILAR';
 }
 
+/** Ответ API для похожих фильмов */
 export interface SimilarFilmsResponse {
   total: number;
   items: SimilarFilm[];
 }
 
+/** Участник съёмочной группы */
 export interface StaffMember {
   staffId: number;
   nameRu: string;

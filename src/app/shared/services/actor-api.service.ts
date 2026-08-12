@@ -9,25 +9,31 @@ import { StaffMember } from '../interfaces/top-films.interface';
   providedIn: 'root',
 })
 export class ActorService {
+  /** HTTP-клиент */
   http = inject(HttpClient);
+  /** Базовый URL API для работы с персонами */
   apiUrl = 'https://kinopoiskapiunofficial.tech/api/v1';
 
-  getTopFilms(id: number): Observable<PersonDetail> {
+  /** Детальная информация о персоне (актёр, режиссёр) */
+  getPersonById(id: number): Observable<PersonDetail> {
     return this.http.get<PersonDetail>(
-      `${this.apiUrl}/staff${id}`,
+      `${this.apiUrl}/staff/${id}`,
       {
         headers: {
           'X-API-KEY': environment.kinopoiskApiKey,
           'Content-Type': 'application/json',
         },
-      }
+      },
     );
   }
 
-  getStaff(id: number): Observable<StaffMember[]> {
-    return this.http
-      .get<StaffMember[]>(`https://kinopoiskapiunofficial.tech/api/v1/staff?filmId=${id}`, {
+  /** Список актёров и съёмочной группы */
+  getStaff(filmId: number): Observable<StaffMember[]> {
+    return this.http.get<StaffMember[]>(
+      `https://kinopoiskapiunofficial.tech/api/v1/staff?filmId=${filmId}`,
+      {
         headers: { 'X-API-KEY': environment.kinopoiskApiKey },
-      });
+      },
+    );
   }
 }
