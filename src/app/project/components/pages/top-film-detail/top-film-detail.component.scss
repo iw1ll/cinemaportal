@@ -24,3 +24,22 @@
     font-size: 16px;
   }
 }
+
+.detail-layout {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+
+  app-film-card {
+    flex: 1;
+  }
+
+  &__actors {
+    width: 300px;
+    flex-shrink: 0;
+  }
+}

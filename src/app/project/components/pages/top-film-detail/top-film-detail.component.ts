@@ -7,11 +7,12 @@ import { FilmDetail, SimilarFilm, StaffMember } from '../../../../shared/interfa
 import { FilmCardComponent } from '../../../../shared/ui/component/film-card/film-card';
 import { FilmRecommended } from '../../../../shared/ui/component/film-recommended/film-recommended';
 import { PageState } from '../../../../shared/types/state.type';
+import { FilmActorsComponent } from '../../../../shared/ui/component/film-actors/film-actors';
 
 @Component({
   selector: 'app-film-detail',
   standalone: true,
-  imports: [CommonModule, FilmCardComponent, FilmRecommended],
+  imports: [CommonModule, FilmCardComponent, FilmRecommended, FilmActorsComponent],
   templateUrl: './top-film-detail.component.html',
   styleUrl: './top-film-detail.component.scss',
 })
@@ -33,8 +34,8 @@ export class TopFilmDetailComponent implements OnInit {
   /** Состояние загрузки рекомендаций */
   recommendedState = signal<PageState>('loading');
 
-  /**  */
-  staff = signal<StaffMember[] | null>(null);
+  /** Все участники */
+  staff = signal<StaffMember[]>([]);
 
   /** Загружаем фильм и рекомендации параллельно */
   ngOnInit(): void {
@@ -75,7 +76,7 @@ export class TopFilmDetailComponent implements OnInit {
     );
   }
 
-    /**  */
+  /**  */
   getStaff(id: number) {
     return this.filmService.getStaff(id).pipe(
       tap(data => {
@@ -93,5 +94,9 @@ export class TopFilmDetailComponent implements OnInit {
     this.backNavigate.navigate(['/top'], {
       queryParams: { page: fromPage },
     });
+  }
+
+  goToCast(): void {
+    this.backNavigate.navigate(['/film', this.film()!.kinopoiskId, 'cast']);
   }
 }

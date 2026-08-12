@@ -1,12 +1,16 @@
 <button class="back-btn" (click)="backToTopPage()">Назад к списку</button>
-<app-film-card [film]="film()" [state]="state()"/>
+<div class="detail-layout">
+  <app-film-card [film]="film()" [state]="state()" />
+
+  <!-- @if (staff().length) { -->
+    <app-film-actors [staff]="staff()" (viewAll)="goToCast()" />
+  <!-- } -->
+</div>
 
 @if (film()) {
   @defer (when film() !== null) {
     <app-film-recommended [recommendedFilms]="recommendedFilms()" [state]="recommendedState()"/>
   }
 }
-<!-- Добавим:
-FilmReviews — отзывы
-FilmActors — актёры -->
+<!-- FilmReviews — отзывы-->
 

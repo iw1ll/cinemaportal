@@ -1,0 +1,23 @@
+<h3 class="actors__title">В главных ролях</h3>
+
+<div class="actors__grid">
+  @for (actor of visibleActors; track actor.staffId) {
+    <div class="actors__item">
+      <img
+        class="actors__photo"
+        [src]="actor.posterUrl"
+        [alt]="actor.nameRu"
+      />
+      <span class="actors__name">{{ actor.nameRu }}</span>
+      @if (actor.description) {
+        <span class="actors__role">{{ actor.description }}</span>
+      }
+    </div>
+  }
+</div>
+
+@if (totalActors > limit()) {
+  <button class="actors__more" (click)="viewAll.emit()">
+    Весь каст ({{ totalActors }})
+  </button>
+}

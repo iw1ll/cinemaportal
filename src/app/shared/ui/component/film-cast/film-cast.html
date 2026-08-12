@@ -1,0 +1,15 @@
+<h2>Весь каст</h2>
+
+@if (loading()) {
+  <app-loader />
+} @else {
+  <div class="cast__grid">
+    @for (person of staff(); track person.staffId) {
+      <div class="cast__item">
+        <img [src]="person.posterUrl" [alt]="person.nameRu" />
+        <span>{{ person.nameRu }}</span>
+        <span>{{ person.description || person.professionText }}</span>
+      </div>
+    }
+  </div>
+}
