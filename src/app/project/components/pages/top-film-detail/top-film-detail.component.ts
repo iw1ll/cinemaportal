@@ -1,7 +1,7 @@
 import { Component, inject, signal, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { catchError, forkJoin, of, tap } from 'rxjs';
+import { catchError, forkJoin, Observable, of, tap } from 'rxjs';
 import { FilmDetail, SimilarFilm, StaffMember } from '../../../../shared/interfaces/top-films.interface';
 import { FilmCardComponent } from '../../../../shared/ui/component/film-card/film-card';
 import { FilmRecommended } from '../../../../shared/ui/component/film-recommended/film-recommended';
@@ -9,6 +9,7 @@ import { PageState } from '../../../../shared/types/state.type';
 import { FilmActorsComponent } from '../../../../shared/ui/component/film-actors/film-actors';
 import { ActorService } from '../../../../shared/services/actor-api.service';
 import { FilmService } from '../../../../shared/services/film-api.service';
+import { PersonDetail } from '../../../../shared/interfaces/actors.interface';
 
 @Component({
   selector: 'app-film-detail',
@@ -25,7 +26,7 @@ export class TopFilmDetailComponent implements OnInit {
   /** Сервис для запросов к API по фильмам */
   private actorService = inject(ActorService);
   /** Программная навигация */
-  private backNavigate = inject(Router);
+  private navigate = inject(Router);
 
   /** Данные фильма */
   film = signal<FilmDetail | null>(null);
@@ -46,7 +47,8 @@ export class TopFilmDetailComponent implements OnInit {
     forkJoin([
       this.getDetails(id),
       this.getRecommendedFilms(id),
-      this.getStaff(id)
+      this.getStaff(id),
+      this.getActor()
     ]).subscribe();
   }
 
@@ -91,15 +93,22 @@ export class TopFilmDetailComponent implements OnInit {
     );
   }
 
+  getActor(): Observable<PersonDetail> {
+    return this.actorService.getPersonById(797).pipe(
+      tap(a => console.log(a))
+    );
+    //врменно тут
+  }
+
   /** Возврат к списку с сохранением страницы */
   backToTopPage(): void {
     const fromPage = this.route.snapshot.queryParams['fromPage'] || 1;
-    this.backNavigate.navigate(['/top'], {
+    this.navigate.navigate(['/top'], {
       queryParams: { page: fromPage },
     });
   }
 
   goToCast(): void {
-    this.backNavigate.navigate(['/film', this.film()!.kinopoiskId, 'cast']);
+    this.navigate.navigate(['/film', this.film()!.kinopoiskId, 'cast']);
   }
 }
