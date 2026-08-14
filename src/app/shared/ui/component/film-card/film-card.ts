@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FilmDetail } from '../../../interfaces/top-films.interface';
 import { PageState } from '../../../types/state.type';
@@ -8,6 +8,7 @@ import { LoaderComponent } from '../loader/loader';
   selector: 'app-film-card',
   standalone: true,
   imports: [CommonModule, LoaderComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './film-card.html',
   styleUrl: './film-card.scss',
 })

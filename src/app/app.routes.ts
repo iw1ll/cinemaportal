@@ -9,6 +9,7 @@ import { TopFilmComponent } from './project/components/pages/top/top';
 import { TopFilmDetailComponent } from './project/components/pages/top-film-detail/top-film-detail.component';
 import { FilmCastComponent } from './shared/ui/component/film-cast/film-cast';
 import { ActorComponent } from './project/components/pages/actor/actor';
+import { RegisterComponent } from './project/components/pages/register/register';
 
 export const routes: Routes = [
   {
@@ -17,6 +18,7 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: '/main', pathMatch: 'full' },
       { path: 'main', component: MainComponent },
+      { path: 'register', component: RegisterComponent },
       { path: 'top', component: TopFilmComponent },
       { path: 'film/:id', component: TopFilmDetailComponent },
       { path: 'film/:id/cast', component: FilmCastComponent },

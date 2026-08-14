@@ -1,0 +1,45 @@
+<h2 class="register__title">Регистрация</h2>
+
+<form class="register__form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <div class="register__field">
+    <label class="register__label" for="email">Email</label>
+    <input
+      class="register__input"
+      formControlName="email"
+      type="text"
+      placeholder="Введите email"
+    />
+
+    @if (registerForm.get('email')?.invalid && registerForm.get('email')?.touched) {
+      @if (registerForm.get('email')?.hasError('required')) {
+        <p class="register__error">Email обязателен</p>
+      }
+      @if (registerForm.get('email')?.hasError('pattern')) {
+        <p class="register__error">Некорректный email</p>
+      }
+    }
+  </div>
+
+  <div class="register__field">
+    <label class="register__label" for="password">Пароль</label>
+    <input
+      class="register__input"
+      formControlName="password"
+      type="password"
+      placeholder="Введите пароль"
+    />
+
+    @if (registerForm.get('password')?.invalid && registerForm.get('password')?.touched) {
+      @if (registerForm.get('password')?.hasError('required')) {
+        <p class="register__error">Пароль обязателен</p>
+      }
+      @if (registerForm.get('password')?.hasError('minlength')) {
+        <p class="register__error">Минимум 8 символов</p>
+      }
+    }
+  </div>
+
+  <button class="register__submit" type="submit" [disabled]="registerForm.invalid">
+    Зарегистрироваться
+  </button>
+</form>
