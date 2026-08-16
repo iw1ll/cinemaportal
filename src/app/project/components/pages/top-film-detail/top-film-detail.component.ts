@@ -108,10 +108,12 @@ export class TopFilmDetailComponent implements OnInit {
     });
   }
 
+  /** Перейти к списку актеров */
   goToCast(): void {
     this.navigate.navigate(['/film', this.film()!.kinopoiskId, 'cast']);
   }
 
+  /** Перейти к актеру */
   goToActor(staffId: number): void {
     this.navigate.navigate(['/actor', staffId]);
   }
