@@ -33,6 +33,7 @@
     font-size: 15px;
     color: #e2e2f0;
     transition: border-color 0.2s;
+    width: 100%;
 
     &::placeholder {
       color: #6b6b85;
@@ -52,6 +53,49 @@
     font-size: 13px;
     color: #e94560;
     margin: 0;
+  }
+
+  &__phone-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+    align-items: center;
+  }
+
+  &__remove {
+    background: #2a2a3d;
+    color: #a5a5c0;
+    border: 1px solid #3a3a5a;
+    border-radius: 8px;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    flex-shrink: 0;
+    font-size: 18px;
+
+    &:hover:not(:disabled) {
+      background: #3a3a5a;
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+  }
+
+  &__add {
+    background: transparent;
+    color: #c4b5fd;
+    border: 1px dashed #3a3a5a;
+    border-radius: 8px;
+    padding: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.2s;
+
+    &:hover {
+      background: #1e1e2f;
+    }
   }
 
   &__submit {
