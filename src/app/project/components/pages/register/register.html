@@ -2,6 +2,25 @@
 
 <form class="register__form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
   <div class="register__field">
+    <label class="register__label" for="name">Имя</label>
+    <input
+      class="register__input"
+      formControlName="name"
+      type="text"
+      placeholder="Введите имя"
+    />
+
+    @if (registerForm.get('name')?.invalid && registerForm.get('name')?.touched) {
+      @if (registerForm.get('name')?.hasError('required')) {
+        <p class="register__error">Имя обязательно</p>
+      }
+      @if (registerForm.get('name')?.hasError('minlength')) {
+        <p class="register__error">Минимум 2 символа</p>
+      }
+    }
+  </div>
+
+  <div class="register__field">
     <label class="register__label" for="email">Email</label>
     <input
       class="register__input"
@@ -37,6 +56,35 @@
         <p class="register__error">Минимум 8 символов</p>
       }
     }
+  </div>
+
+  <div class="register__field">
+    <label class="register__label">Телефоны</label>
+
+    <div formArrayName="phones">
+      @for (phone of phones.controls; track $index; let i = $index) {
+        <div class="register__phone-row">
+          <input
+            class="register__input"
+            [formControlName]="i"
+            type="text"
+            placeholder="+7 (___) ___-__-__"
+          />
+          <button
+            class="register__remove"
+            type="button"
+            (click)="removePhone(i)"
+            [disabled]="phones.length === 1"
+          >
+            ×
+          </button>
+        </div>
+      }
+    </div>
+
+    <button class="register__add" type="button" (click)="addPhone()">
+      + Добавить телефон
+    </button>
   </div>
 
   <button class="register__submit" type="submit" [disabled]="registerForm.invalid">
