@@ -3,12 +3,7 @@
 <form class="register__form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
   <div class="register__field">
     <label class="register__label" for="name">Имя</label>
-    <input
-      class="register__input"
-      formControlName="name"
-      type="text"
-      placeholder="Введите имя"
-    />
+    <input class="register__input" formControlName="name" type="text" placeholder="Введите имя" />
 
     @if (registerForm.get('name')?.invalid && registerForm.get('name')?.touched) {
       @if (registerForm.get('name')?.hasError('required')) {
@@ -16,6 +11,11 @@
       }
       @if (registerForm.get('name')?.hasError('minlength')) {
         <p class="register__error">Минимум 2 символа</p>
+      }
+      @if (registerForm.get('name')?.hasError('forbiddenName')) {
+        <p class="register__error">
+          Имя "{{ registerForm.get('name')?.getError('forbiddenName')?.value }}" запрещено!
+        </p>
       }
     }
   </div>
@@ -78,13 +78,14 @@
           >
             ×
           </button>
+          @if (phones.at(i).hasError('invalidPhone')) {
+            <p class="register__error">Некорректный телефон</p>
+          }
         </div>
       }
     </div>
 
-    <button class="register__add" type="button" (click)="addPhone()">
-      + Добавить телефон
-    </button>
+    <button class="register__add" type="button" (click)="addPhone()">+ Добавить телефон</button>
   </div>
 
   <button class="register__submit" type="submit" [disabled]="registerForm.invalid">
