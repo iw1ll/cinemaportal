@@ -1,11 +1,5 @@
 import { Component } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  FormArray,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, FormArray, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -17,9 +11,18 @@ export class RegisterComponent {
   EMAIL_PATTERN = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   registerForm = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.minLength(2)]),
-    email: new FormControl('', [Validators.required, Validators.pattern(this.EMAIL_PATTERN)]),
-    password: new FormControl('', [Validators.required, Validators.minLength(8)]),
+    name: new FormControl('', {
+      validators: [Validators.required, Validators.minLength(2)],
+      updateOn: 'blur'
+    }),
+    email: new FormControl('', {
+      validators: [Validators.required, Validators.email],
+      updateOn: 'blur',
+    }),
+    password: new FormControl('', {
+      validators: [Validators.required, Validators.minLength(8)],
+      updateOn: 'blur',
+    }),
     phones: new FormArray([new FormControl('', Validators.required)]),
   });
 
