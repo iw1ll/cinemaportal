@@ -6,5 +6,12 @@
     <a routerLink="/series" routerLinkActive="active">Сериалы</a>
     <a routerLink="/anime" routerLinkActive="active">Аниме</a>
     <a routerLink="/cartoons" routerLinkActive="active">Мультфильмы</a>
+
+    @if (isAuth) {
+      <button class="header__logout" (click)="logout()">Выйти</button>
+    } @else {
+      <a routerLink="/login" routerLinkActive="active">Войти</a>
+      <a routerLink="/register" routerLinkActive="active">Регистрация</a>
+    }
   </nav>
 </header>

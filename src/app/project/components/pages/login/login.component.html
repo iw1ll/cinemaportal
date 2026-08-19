@@ -1,0 +1,33 @@
+<h2 class="login__title">Вход</h2>
+
+<form class="login__form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <div class="login__field">
+    <label class="login__label">Email</label>
+    <input class="login__input" formControlName="email" type="text" placeholder="Введите email" />
+
+    @if (loginForm.get('email')?.invalid && loginForm.get('email')?.touched) {
+      @if (loginForm.get('email')?.hasError('required')) {
+        <p class="login__error">Email обязателен</p>
+      }
+      @if (loginForm.get('email')?.hasError('email')) {
+        <p class="login__error">Некорректный email</p>
+      }
+    }
+  </div>
+
+  <div class="login__field">
+    <label class="login__label">Пароль</label>
+    <input class="login__input" formControlName="password" type="password" placeholder="Введите пароль" />
+
+    @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
+      @if (loginForm.get('password')?.hasError('required')) {
+        <p class="login__error">Пароль обязателен</p>
+      }
+      @if (loginForm.get('password')?.hasError('minlength')) {
+        <p class="login__error">Минимум 8 символов</p>
+      }
+    }
+  </div>
+
+  <button class="login__submit" type="submit" [disabled]="loginForm.invalid">Войти</button>
+</form>

@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, FormArray, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AuthService } from '../../../../shared/services/auth.service';
 import {
   forbiddenNameValidator,
   phoneValidator,
 } from '../../../../shared/validators/custom-validators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -12,6 +14,9 @@ import {
   styleUrl: './register.scss',
 })
 export class RegisterComponent {
+  private authService = inject(AuthService);
+  private router = inject(Router);
+
   EMAIL_PATTERN = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   registerForm = new FormGroup({
@@ -20,7 +25,7 @@ export class RegisterComponent {
       updateOn: 'blur',
     }),
     email: new FormControl('', {
-      validators: [Validators.required, Validators.email],
+      validators: [Validators.required, Validators.pattern(this.EMAIL_PATTERN)],
       updateOn: 'blur',
     }),
     password: new FormControl('', {
@@ -29,23 +34,20 @@ export class RegisterComponent {
     }),
     phones: new FormArray([
       new FormControl('', {
-        validators: [Validators.required, phoneValidator()],
+        validators: [phoneValidator()],
         updateOn: 'blur',
       }),
     ]),
   });
 
-  /** Получить FormArray телефонов */
   get phones(): FormArray {
     return this.registerForm.get('phones') as FormArray;
   }
 
-  /** Добавить телефон */
   addPhone(): void {
     this.phones.push(new FormControl('', Validators.required));
   }
 
-  /** Удалить телефон по индексу */
   removePhone(index: number): void {
     if (this.phones.length > 1) {
       this.phones.removeAt(index);
@@ -53,10 +55,25 @@ export class RegisterComponent {
   }
 
   onSubmit(): void {
-    if (this.registerForm.valid) {
-      console.log(this.registerForm.value);
-      console.log(this.registerForm.get('password')?.errors);
-      console.log(this.registerForm.get('password')?.value);
+    if (this.registerForm.invalid) {
+      return;
     }
+
+    const { name, email, password } = this.registerForm.value;
+
+    this.authService.register({
+      email: email ?? '',
+      password: password ?? '',
+      name: name ?? '',
+    }).subscribe({
+      next: () => {
+        // localStorage.setItem('token', response.token);
+        console.log('✅ Регистрация успешна');
+        this.router.navigate(['/login']);
+      },
+      error: err => {
+        console.error('❌ Ошибка регистрации:', err);
+      },
+    });
   }
 }

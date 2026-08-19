@@ -10,8 +10,8 @@ import { catchError, of, tap } from 'rxjs';
 @Component({
   selector: 'app-actor',
   imports: [ActorDetailComponent, LoaderComponent],
-  templateUrl: './actor.html',
-  styleUrl: './actor.scss',
+  templateUrl: './actor.component.html',
+  styleUrl: './actor.component.scss',
 })
 export class ActorComponent implements OnInit {
   private route = inject(ActivatedRoute);
