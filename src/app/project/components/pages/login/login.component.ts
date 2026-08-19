@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.scss',
+  styleUrl: './login.component.scss',
 })
 export class LoginComponent {
   private authService = inject(AuthService);

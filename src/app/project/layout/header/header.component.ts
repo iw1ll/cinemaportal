@@ -5,8 +5,8 @@ import { RouterLink, RouterLinkActive, Router } from '@angular/router';
   selector: 'app-header',
   standalone: true,
   imports: [RouterLink, RouterLinkActive],
-  templateUrl: './header.html',
-  styleUrl: './header.scss',
+  templateUrl: './header.component.html',
+  styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
   private router = inject(Router);

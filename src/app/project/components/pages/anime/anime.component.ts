@@ -3,8 +3,8 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-anime',
   imports: [],
-  templateUrl: './anime.html',
-  styleUrl: './anime.scss',
+  templateUrl: './anime.component.html',
+  styleUrl: './anime.component.scss',
 })
 export class AnimeComponent {
 

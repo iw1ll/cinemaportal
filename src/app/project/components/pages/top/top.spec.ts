@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Top } from './top';
+import { Top } from './top.component';
 
 describe('Top', () => {
   let component: Top;

@@ -10,8 +10,8 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-register',
   imports: [ReactiveFormsModule],
-  templateUrl: './register.html',
-  styleUrl: './register.scss',
+  templateUrl: './register.component.html',
+  styleUrl: './register.component.scss',
 })
 export class RegisterComponent {
   private authService = inject(AuthService);

@@ -11,8 +11,8 @@ import { FilmService } from '../../../../shared/services/film-api.service';
 @Component({
   selector: 'app-top',
   imports: [PaginationComponent, NgTemplateOutlet, LoaderComponent],
-  templateUrl: './top.html',
-  styleUrl: './top.scss',
+  templateUrl: './top.component.html',
+  styleUrl: './top.component.scss',
 })
 export class TopFilmComponent implements OnInit {
   /** Сервис для запросов */
