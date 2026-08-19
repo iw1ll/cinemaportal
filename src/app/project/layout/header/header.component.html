@@ -1,15 +1,15 @@
 <header class="header">
   <a routerLink="/main" class="header__logo">🎬 Кинопортал</a>
   <nav class="header__nav">
-    <a routerLink="/top" routerLinkActive="active">Лучшие фильмы</a>
-    <a routerLink="/movies" routerLinkActive="active">Фильмы</a>
-    <a routerLink="/series" routerLinkActive="active">Сериалы</a>
-    <a routerLink="/anime" routerLinkActive="active">Аниме</a>
-    <a routerLink="/cartoons" routerLinkActive="active">Мультфильмы</a>
-
     @if (isAuth) {
+      <a routerLink="/top" routerLinkActive="active">Лучшие фильмы</a>
+      <a routerLink="/movies" routerLinkActive="active">Фильмы</a>
+      <a routerLink="/series" routerLinkActive="active">Сериалы</a>
+      <a routerLink="/anime" routerLinkActive="active">Аниме</a>
+      <a routerLink="/cartoons" routerLinkActive="active">Мультфильмы</a>
       <button class="header__logout" (click)="logout()">Выйти</button>
     } @else {
+      <a routerLink="/top" routerLinkActive="active">Лучшие фильмы</a>
       <a routerLink="/login" routerLinkActive="active">Войти</a>
       <a routerLink="/register" routerLinkActive="active">Регистрация</a>
     }

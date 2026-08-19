@@ -29,7 +29,6 @@ export const routes: Routes = [
       {
         path: 'top',
         component: TopFilmComponent,
-        canActivate: [authGuard],
       },
       {
         path: 'film/:id',
