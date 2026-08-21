@@ -27,7 +27,7 @@ export class RegisterComponent {
   registerForm = new FormGroup({
     name: new FormControl('', {
       validators: [Validators.required, Validators.minLength(2), forbiddenNameValidator('admin')],
-      updateOn: 'blur', // Валидация при потере фокуса
+      updateOn: 'blur',
     }),
     email: new FormControl('', {
       validators: [Validators.required, Validators.pattern(this.EMAIL_PATTERN)],
