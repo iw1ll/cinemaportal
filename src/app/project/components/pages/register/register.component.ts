@@ -6,6 +6,7 @@ import {
   phoneValidator,
 } from '../../../../shared/validators/custom-validators';
 import { Router } from '@angular/router';
+import { catchError, of, tap } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -14,15 +15,19 @@ import { Router } from '@angular/router';
   styleUrl: './register.component.scss',
 })
 export class RegisterComponent {
+  /** Сервис для аутентификации пользователей */
   private authService = inject(AuthService);
+    /** Сервис для навигации между маршрутами */
   private router = inject(Router);
 
+  /** Регулярное выражение для валидации email адреса */
   EMAIL_PATTERN = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
+  /** Основная форма регистрации с полями и валидаторами */
   registerForm = new FormGroup({
     name: new FormControl('', {
       validators: [Validators.required, Validators.minLength(2), forbiddenNameValidator('admin')],
-      updateOn: 'blur',
+      updateOn: 'blur', // Валидация при потере фокуса
     }),
     email: new FormControl('', {
       validators: [Validators.required, Validators.pattern(this.EMAIL_PATTERN)],
@@ -40,20 +45,24 @@ export class RegisterComponent {
     ]),
   });
 
+  /** Геттер для удобного доступа к массиву телефонов */
   get phones(): FormArray {
     return this.registerForm.get('phones') as FormArray;
   }
 
+  /** Добавляет новое поле */
   addPhone(): void {
     this.phones.push(new FormControl('', Validators.required));
   }
 
+    /** Удаляет поле телефона */
   removePhone(index: number): void {
     if (this.phones.length > 1) {
       this.phones.removeAt(index);
     }
   }
 
+  /** Обработчик отправки формы регистрации */
   onSubmit(): void {
     if (this.registerForm.invalid) {
       return;
@@ -65,15 +74,15 @@ export class RegisterComponent {
       email: email ?? '',
       password: password ?? '',
       name: name ?? '',
-    }).subscribe({
-      next: () => {
-        // localStorage.setItem('token', response.token);
-        console.log('✅ Регистрация успешна');
-        this.router.navigate(['/login']);
-      },
-      error: err => {
-        console.error('❌ Ошибка регистрации:', err);
-      },
-    });
+    }).pipe(
+      tap(() => {
+         console.log('✅ Регистрация успешна');
+          this.router.navigate(['/login']);
+      }),
+      catchError((err) => {
+         console.error('❌ Ошибка регистрации:', err);
+         return of(null);
+      })
+    ).subscribe();
   }
 }
