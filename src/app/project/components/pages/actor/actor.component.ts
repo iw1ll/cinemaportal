@@ -14,22 +14,28 @@ import { catchError, of, tap } from 'rxjs';
   styleUrl: './actor.component.scss',
 })
 export class ActorComponent implements OnInit {
+  /** Сервис для доступа к параметрам маршрута */
   private route = inject(ActivatedRoute);
+  /** Сервис для работы с API актеров */
   private actorService = inject(ActorService);
-
+  /** Сигнал с данными о актере */
   person = signal<PersonDetail | null>(null);
+
+  /** Сигнал с состоянием загрузки страницы */
   state = signal<PageState>('loading');
 
   ngOnInit(): void {
     this.getPersonById();
   }
 
+  /** Получает данные о персоне */
   getPersonById() {
     const id = this.route.snapshot.params['id'];
+
     this.actorService.getPersonById(id).pipe(
       tap((actor) => {
-        this.person.set(actor);
-        this.state.set('success');
+        this.person.set(actor); // Устанавливаем данные о персоне
+        this.state.set('success'); // Меняем состояние на "успешно"
       }),
       catchError(() => {
         this.state.set('error');

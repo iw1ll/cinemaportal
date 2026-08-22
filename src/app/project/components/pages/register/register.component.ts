@@ -19,7 +19,6 @@ export class RegisterComponent {
   private authService = inject(AuthService);
     /** Сервис для навигации между маршрутами */
   private router = inject(Router);
-
   /** Регулярное выражение для валидации email адреса */
   EMAIL_PATTERN = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
