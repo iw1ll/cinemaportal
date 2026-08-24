@@ -1,0 +1,50 @@
+// modal.component.scss
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: #1e1e2f;
+  border: 1px solid #2a2a3d;
+  border-radius: 12px;
+  min-width: 320px;
+  max-width: 500px;
+  color: #e2e2f0;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid #2a2a3d;
+  }
+
+  &__title {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  &__close {
+    background: none;
+    border: none;
+    color: #6b6b85;
+    font-size: 22px;
+    cursor: pointer;
+
+    &:hover {
+      color: #e2e2f0;
+    }
+  }
+
+  &__body {
+    padding: 20px;
+  }
+}

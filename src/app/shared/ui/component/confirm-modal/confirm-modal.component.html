@@ -1,0 +1,19 @@
+<div class="modal-overlay" (click)="closeModal.emit()">
+      <div class="modal" (click)="$event.stopPropagation()">
+        <div class="modal__header">
+          <h3 class="modal__title">{{ title() }}</h3>
+          <button class="modal__close" (click)="closeModal.emit()">×</button>
+        </div>
+        <div class="modal__body">
+          <p class="modal__text">{{ message() }}</p>
+          <div class="modal__actions">
+            <button class="modal__btn modal__btn--cancel" (click)="closeModal.emit()">
+              {{ cancelLabel() }}
+            </button>
+            <button class="modal__btn modal__btn--confirm" (click)="confirm.emit()">
+              {{ confirmLabel() }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
