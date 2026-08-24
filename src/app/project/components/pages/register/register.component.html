@@ -29,6 +29,13 @@
       placeholder="Введите email"
     />
 
+    @if (registerForm.get('email')?.pending) {
+      <p class="register__checking">Проверяем email...</p>
+    }
+    @if (registerForm.get('email')?.hasError('emailTaken')) {
+      <p class="register__error">Этот email уже занят</p>
+    }
+
     @if (registerForm.get('email')?.invalid && registerForm.get('email')?.touched) {
       @if (registerForm.get('email')?.hasError('required')) {
         <p class="register__error">Email обязателен</p>

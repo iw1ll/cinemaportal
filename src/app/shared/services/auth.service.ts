@@ -1,5 +1,3 @@
-// src/app/shared/services/auth.service.ts
-
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -32,5 +30,10 @@ export class AuthService {
   /** Логин */
   login(data: LoginRequest): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.apiUrl}/auth/login`, data);
+  }
+
+  /** Проверка емейла */
+  checkEmail(email: string): Observable<{ exists: boolean }> {
+    return this.http.post<{ exists: boolean }>(`${this.apiUrl}/auth/check-email`, { email });
   }
 }

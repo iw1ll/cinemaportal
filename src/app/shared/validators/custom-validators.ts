@@ -1,5 +1,6 @@
 import { AbstractControl, ValidatorFn } from "@angular/forms";
 
+/** Валидатор запрещенных имен */
 export function forbiddenNameValidator(forbiddenName: string): ValidatorFn {
   return (control: AbstractControl): Record<string, unknown> | null => {
     const value = control.value?.toLowerCase();
@@ -11,6 +12,7 @@ export function forbiddenNameValidator(forbiddenName: string): ValidatorFn {
   };
 }
 
+/** Валидатор номера телефона */
 export function phoneValidator(): ValidatorFn {
   return (control: AbstractControl): Record<string, unknown> | null => {
     const value = control.value;

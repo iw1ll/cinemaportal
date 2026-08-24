@@ -7,6 +7,7 @@ import {
 } from '../../../../shared/validators/custom-validators';
 import { Router } from '@angular/router';
 import { catchError, of, tap } from 'rxjs';
+import { emailTakenValidator } from '../../../../shared/validators/email-taken.validator';
 
 @Component({
   selector: 'app-register',
@@ -29,8 +30,12 @@ export class RegisterComponent {
       updateOn: 'blur',
     }),
     email: new FormControl('', {
-      validators: [Validators.required, Validators.pattern(this.EMAIL_PATTERN)],
-      updateOn: 'blur',
+      validators: [
+        Validators.required,
+        Validators.pattern(this.EMAIL_PATTERN),
+      ],
+      asyncValidators: [emailTakenValidator()],
+      // updateOn: 'blur',
     }),
     password: new FormControl('', {
       validators: [Validators.required, Validators.minLength(8)],
