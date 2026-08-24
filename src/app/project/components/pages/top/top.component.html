@@ -1,13 +1,13 @@
 <h2>Топ 250 фильмов</h2>
 
 <app-pagination
-  [currentPage]="currentPage()"
-  [totalPages]="totalPages()"
-  (prev)="prevPage()"
-  (next)="nextPage()"
+  [currentPage]="topFilmsService.currentPage()"
+  [totalPages]="topFilmsService.totalPages()"
+  (prev)="topFilmsService.prevPage()"
+  (next)="topFilmsService.nextPage()"
 />
 
-@switch (state()) {
+@switch (topFilmsService.state()) {
   @case ('loading') {
     <app-loader size="large" />
     <div class="grid">
@@ -21,7 +21,7 @@
   }
   @case ('success') {
     <div class="grid">
-      @for (film of topFilms(); track film.kinopoiskId) {
+      @for (film of topFilmsService.films(); track film.kinopoiskId) {
         <div class="card" (click)="goToFilm(film.kinopoiskId)">
           <img class="card__poster" [src]="film.posterUrlPreview" [alt]="film.nameRu" />
           <div class="card__info">
@@ -46,8 +46,8 @@
 </ng-template>
 
 <app-pagination
-  [currentPage]="currentPage()"
-  [totalPages]="totalPages()"
-  (prev)="prevPage()"
-  (next)="nextPage()"
+  [currentPage]="topFilmsService.currentPage()"
+  [totalPages]="topFilmsService.totalPages()"
+  (prev)="topFilmsService.prevPage()"
+  (next)="topFilmsService.nextPage()"
 />
