@@ -13,6 +13,9 @@ import { RegisterComponent } from './project/components/pages/register/register.
 import { authGuard } from './shared/guards/auth.guard';
 import { LoginComponent } from './project/components/pages/login/login.component';
 
+/**
+ * Маршруты приложения
+ */
 export const routes: Routes = [
   {
     path: '',
