@@ -40,6 +40,6 @@ export class ActorComponent implements OnInit {
         this.state.set('error');
         return of(null);
       })
-    ).subscribe()
+    ).subscribe();
   }
 }
