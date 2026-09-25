@@ -20,7 +20,6 @@ export class ActorComponent implements OnInit {
   private actorService = inject(ActorService);
   /** Сигнал с данными о актере */
   person = signal<PersonDetail | null>(null);
-
   /** Сигнал с состоянием загрузки страницы */
   state = signal<PageState>('loading');
 
@@ -34,8 +33,8 @@ export class ActorComponent implements OnInit {
 
     this.actorService.getPersonById(id).pipe(
       tap((actor) => {
-        this.person.set(actor); // Устанавливаем данные о персоне
-        this.state.set('success'); // Меняем состояние на "успешно"
+        this.person.set(actor);
+        this.state.set('success');
       }),
       catchError(() => {
         this.state.set('error');
