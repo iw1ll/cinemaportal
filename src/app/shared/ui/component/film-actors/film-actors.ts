@@ -1,6 +1,5 @@
-import { Component, input, output } from '@angular/core';
+import { Component, computed, input, output } from '@angular/core';
 import { StaffMember } from '../../../interfaces/top-films.interface';
-
 
 @Component({
   selector: 'app-film-actors',
@@ -18,16 +17,19 @@ export class FilmActorsComponent {
   viewAll = output<void>();
   /** Клик по актёру — передаём staffId наверх */
   actorClick = output<number>();
-
   /** Только актёры, ограниченное количество */
-  get visibleActors(): StaffMember[] {
+  visibleActors = computed(() => {
     return this.staff()
-      .filter(s => s.professionKey === 'ACTOR')
+      .filter((s) => s.professionKey === 'ACTOR')
       .slice(0, this.limit());
-  }
-
+  });
   /** Сколько всего актёров */
-  get totalActors(): number {
-    return this.staff().filter(s => s.professionKey === 'ACTOR').length;
+  totalActors = computed(() => {
+    return this.staff().filter((s) => s.professionKey === 'ACTOR').length;
+  });
+
+  /** Обработчик клика по актёру */
+  onActorClick(staffId: number): void {
+    this.actorClick.emit(staffId);
   }
 }

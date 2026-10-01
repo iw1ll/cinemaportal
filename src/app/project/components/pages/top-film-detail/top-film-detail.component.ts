@@ -86,7 +86,6 @@ export class TopFilmDetailComponent implements OnInit {
     return this.actorService.getStaff(id).pipe(
       tap(data => {
         this.staff.set(data);
-        console.log(this.staff())
         // this.state.set('success');
       }),
       //доделать
@@ -95,7 +94,7 @@ export class TopFilmDetailComponent implements OnInit {
 
   getActor(): Observable<PersonDetail> {
     return this.actorService.getPersonById(797).pipe(
-      tap(a => console.log(a))
+      // tap(a => console.log(a))
     );
     //врменно тут
   }
