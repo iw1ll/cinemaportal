@@ -6,6 +6,8 @@
     <p>Ошибка загрузки</p>
   }
   @case ('success') {
-    <app-actor-detail [person]="person()!" />
+    @if (person(); as personData) {
+      <app-actor-detail [person]="personData" />
+    }
   }
 }
